@@ -2,30 +2,30 @@
 {
   "name": "latest",
   "version": "latest",
-  "url": "https://martinpdes.github.io/TypedUnits/docs/latest"
+  "url": "https://martinpdes.github.io/TypedUnit/docs/latest"
 }
 ,
 {
   "name": "v0.0.2",
   "version": "v0.0.2",
-  "url": "https://martinpdes.github.io/TypedUnits/docs/v0.0.2"
+  "url": "https://martinpdes.github.io/TypedUnit/docs/v0.0.2"
 }
 ,
 {
   "name": "v0.0.1",
   "version": "v0.0.1",
-  "url": "https://martinpdes.github.io/TypedUnits/docs/v0.0.1"
+  "url": "https://martinpdes.github.io/TypedUnit/docs/v0.0.1"
 }
 ,
 {
   "name": "source",
   "version": "source",
-  "url": "https://martinpdes.github.io/TypedUnits/docs/source"
+  "url": "https://martinpdes.github.io/TypedUnit/docs/source"
 }
 ,
 {
   "name": "0.0.0.0",
   "version": "0.0.0.0",
-  "url": "https://martinpdes.github.io/TypedUnits/docs/0.0.0.0"
+  "url": "https://martinpdes.github.io/TypedUnit/docs/0.0.0.0"
 }
 ]

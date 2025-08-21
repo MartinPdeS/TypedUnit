@@ -3,7 +3,7 @@ Workflow - 0
 ============
 This shows how to use TypedUnits for unit validation in a function.
 """
-from TypedUnits import Energy, Time, Power, validate_units, ureg
+from TypedUnit import Energy, Time, Power, validate_units, ureg
 
 # Normal Pint instantiation
 energy = 100 * ureg.joule
