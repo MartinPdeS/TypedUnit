@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel", "setuptools_scm[toml]>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TypedUnits"
+dynamic = ["version"]
+description = "A package wrapping pint for handling typed units in Python."
+license = {file = "LICENSE"}
+readme = "README.rst"
+requires-python = ">=3.10"
+authors = [{ name="Martin Poinsinet de Sivry-Houle", email="martin.poinsinet.de.sivry@gmail.com"}]
+classifiers = [
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: Implementation :: CPython',
+    'Development Status :: 4 - Beta',
+    'Topic :: Scientific/Engineering :: Physics',
+    'License :: OSI Approved :: MIT License',
+    'Intended Audience :: Science/Research',
+]
+
+keywords = [
+    "typed units",
+    "pint",
+    "physical quantities"
+]
+
+dependencies = [
+    "pint",
+]
+
+[project.urls]
+Homepage = "https://github.com/MartinPdeS/TypedUnits"
+Documentation = "https://martinpdes.github.io/TypedUnits/"
+Repository = "https://github.com/MartinPdeS/TypedUnits.git"
+
+[tool.setuptools_scm]
+write_to = "TypedUnits/_version.py"
+version_scheme = "only-version"
+local_scheme = "no-local-version"
+
+[project.optional-dependencies]
+testing = [
+    "pytest >=7.4,<9.0",
+    "pytest-cov >=2,<7",
+    "pytest-json-report ~=1.5",
+    "flake8 ==7.3.0",
+    "coverage ~=7.6"
+]
+
+documentation = [
+    "numpydoc ~=1.8",
+    "sphinx >=6",
+    "sphinx-gallery ~=0.17",
+    "sphinx-rtd-theme >=2,<4",
+    "pydata-sphinx-theme ~=0.15"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+xfail_strict = true
+log_cli_level = "INFO"
+testpaths = ["tests"]
+addopts = [
+    '-v',
+    '-rA',
+    '-rw',
+    '--cov=TypedUnits',
+    '--cov-report=html',
+    "--cov-report=term"
+]
+
+[tool.coverage.run]
+source = ['TypedUnits']
+omit = [
+    '*\__init__.py',
+    '*/_version.py',
+    '*/directories.py',
+]
+branch = true
+relative_files = true
