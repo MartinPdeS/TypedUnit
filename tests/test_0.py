@@ -15,7 +15,7 @@ import pytest
 import numpy
 
 # Import the TypedUnits components
-from TypedUnits import (
+from TypedUnit import (
     Energy, Time, Power, Voltage, Current, Resistance,
     Temperature, Length, Volume, FlowRate, Frequency, Mass,
     Angle, RefractiveIndex, Dimensionless,

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-import TypedUnits
+import TypedUnit
 
 
 __all__ = [
@@ -12,7 +12,7 @@ __all__ = [
     'doc_css_path',
 ]
 
-root_path = Path(TypedUnits.__path__[0])
+root_path = Path(TypedUnit.__path__[0])
 
 project_path = root_path.parents[0]
 

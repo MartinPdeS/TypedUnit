@@ -3,7 +3,7 @@ requires = ["setuptools>=40.8.0", "wheel", "setuptools_scm[toml]>=8.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "TypedUnits"
+name = "TypedUnit"
 dynamic = ["version"]
 description = "A package wrapping pint for handling typed units in Python."
 license = {file = "LICENSE"}
@@ -35,12 +35,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/MartinPdeS/TypedUnits"
-Documentation = "https://martinpdes.github.io/TypedUnits/"
-Repository = "https://github.com/MartinPdeS/TypedUnits.git"
+Homepage = "https://github.com/MartinPdeS/TypedUnit"
+Documentation = "https://martinpdes.github.io/TypedUnit/"
+Repository = "https://github.com/MartinPdeS/TypedUnit.git"
 
 [tool.setuptools_scm]
-write_to = "TypedUnits/_version.py"
+write_to = "TypedUnit/_version.py"
 version_scheme = "only-version"
 local_scheme = "no-local-version"
 
@@ -70,13 +70,13 @@ addopts = [
     '-v',
     '-rA',
     '-rw',
-    '--cov=TypedUnits',
+    '--cov=TypedUnit',
     '--cov-report=html',
     "--cov-report=term"
 ]
 
 [tool.coverage.run]
-source = ['TypedUnits']
+source = ['TypedUnit']
 omit = [
     '*\__init__.py',
     '*/_version.py',

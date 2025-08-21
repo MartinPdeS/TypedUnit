@@ -1,10 +1,10 @@
 package:
-  name: typedunits
+  name: typedunit
   version: {{ GIT_DESCRIBE_TAG }}
 
 source:
   path: ../
-  git_url: https://github.com/MartinPdeS/TypedUnits.git
+  git_url: https://github.com/MartinPdeS/TypedUnit.git
 
 build:
   noarch: python
@@ -28,11 +28,11 @@ requirements:
 
 
 about:
-  home: https://github.com/MartinPdeS/TypedUnits
+  home: https://github.com/MartinPdeS/TypedUnit
   license: MIT
   summary: "A package wrapping pint for handling typed units in Python."
-  description: TypedUnits is a library that provides a way to define and manipulate physical quantities with units in a type-safe manner. It builds on top of the Pint library.
-  dev_url: https://github.com/MartinPdeS/TypedUnits
+  description: TypedUnit is a library that provides a way to define and manipulate physical quantities with units in a type-safe manner. It builds on top of the Pint library.
+  dev_url: https://github.com/MartinPdeS/TypedUnit
   doc_url: https://typedunits.readthedocs.io
   license_file: LICENSE
   keywords:
@@ -42,7 +42,7 @@ about:
 
 test:
   imports:
-    - TypedUnits
+    - TypedUnit
   requires:
     - python {{PY_VER}}*
     - pytest >=0.6

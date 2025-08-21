@@ -5,12 +5,12 @@ import sys
 import os
 from sphinx_gallery.sorting import FileNameSortKey
 from pathlib import Path
-import TypedUnits
-from TypedUnits.directories import doc_css_path
+import TypedUnit
+from TypedUnit.directories import doc_css_path
 
 
 package_name = "TypedUnits"
-version = TypedUnits.__version__
+version = TypedUnit.__version__
 
 current_dir = Path(".")
 

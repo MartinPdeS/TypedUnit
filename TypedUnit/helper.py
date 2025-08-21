@@ -1,4 +1,4 @@
-from TypedUnits.units import BaseUnit
+from TypedUnit.units import BaseUnit
 
 from typing import get_type_hints
 
