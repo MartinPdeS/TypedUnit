@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.172** total execution time for 15 files **from all galleries**:
+**00:00.003** total execution time for 2 files **from all galleries**:
 
 .. container::
 
@@ -32,48 +32,9 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_gallery_extra_custom_step_index_fiber.py` (``../examples/extra/custom_step_index_fiber.py``)
-     - 00:00.172
+   * - :ref:`sphx_glr_gallery_example_0.py` (``../examples/example_0.py``)
+     - 00:00.002
      - 0.0
-   * - :ref:`sphx_glr_gallery_extra_custom_graded_index_fiber.py` (``../examples/extra/custom_graded_index_fiber.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_extra_loading_fiber.py` (``../examples/extra/loading_fiber.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_extra_randomize_core.py` (``../examples/extra/randomize_core.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_extra_structure_shift.py` (``../examples/extra/structure_shift.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_line_3.py` (``../examples/geometry/plot_line_3.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_line_4.py` (``../examples/geometry/plot_line_4.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_line_5.py` (``../examples/geometry/plot_line_5.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_10.py` (``../examples/geometry/plot_ring_10.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_2.py` (``../examples/geometry/plot_ring_2.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_3.py` (``../examples/geometry/plot_ring_3.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_4.py` (``../examples/geometry/plot_ring_4.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_5.py` (``../examples/geometry/plot_ring_5.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_ring_7.py` (``../examples/geometry/plot_ring_7.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_gallery_geometry_plot_single.py` (``../examples/geometry/plot_single.py``)
-     - 00:00.000
+   * - :ref:`sphx_glr_gallery_example_1.py` (``../examples/example_1.py``)
+     - 00:00.001
      - 0.0

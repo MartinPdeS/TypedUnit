@@ -16,7 +16,6 @@ current_dir = Path(".")
 
 sys.path.append(str(current_dir.resolve()))
 
-
 def setup(app):
     app.add_css_file(str(doc_css_path))
 
@@ -26,7 +25,6 @@ autodoc_mock_imports = [
     'matplotlib',
     'numpydoc',
 ]
-
 
 project = package_name
 copyright = '2025, Martin Poinsinet de Sivry-Houle'
