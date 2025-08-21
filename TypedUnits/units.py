@@ -1,6 +1,7 @@
 # Initialize a unit registry
-from PyMieSim.units import ureg, Quantity # noqa F401
-import pint
+from pint import Quantity, UnitRegistry
+
+ureg = UnitRegistry()
 
 _scaled_units_str_list = [
     'watt', 'volt', 'meter', 'second', 'liter', 'hertz', 'ohm', 'ampere', 'joule', 'coulomb', 'kelvin', 'celsius', 'degree', 'particle'
