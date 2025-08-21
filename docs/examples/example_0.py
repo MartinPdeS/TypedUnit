@@ -3,8 +3,6 @@ Workflow
 ========
 
 This shows how to use TypedUnits for unit validation in a function.
-
-
 """
 
 
