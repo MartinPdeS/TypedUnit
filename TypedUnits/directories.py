@@ -29,6 +29,6 @@ if __name__ == '__main__':
     for path_name in __all__:
         path = locals()[path_name]
         print(path)
-        assert path.exists(), f"Path {path_name} do not exists"
+        assert path.exists(), f"Path {path_name} do not exists."
 
 # -
