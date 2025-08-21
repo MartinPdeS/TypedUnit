@@ -22,7 +22,7 @@ Workflow - 1
 ============
 This shows how to use TypedUnits for unit validation in a function.
 
-.. GENERATED FROM PYTHON SOURCE LINES 6-27
+.. GENERATED FROM PYTHON SOURCE LINES 6-28
 
 
 
@@ -64,6 +64,7 @@ This shows how to use TypedUnits for unit validation in a function.
     # This fails with clear error message
     length = 5 * ureg.meter
     # calculate_power(length, time)  # TypeError: Expected Energy,
+
 
 .. rst-class:: sphx-glr-timing
 
