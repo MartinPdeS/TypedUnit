@@ -2,12 +2,18 @@
 {
   "name": "latest",
   "version": "latest",
-  "url": "https://martinpdes.github.io/PyMieSim/docs/latest"
+  "url": "https://martinpdes.github.io/TypedUnits/docs/latest"
 }
 ,
 {
-  "name": "v3.7.0",
-  "version": "v3.7.0",
-  "url": "https://martinpdes.github.io/PyMieSim/docs/v3.7.0"
+  "name": "source",
+  "version": "source",
+  "url": "https://martinpdes.github.io/TypedUnits/docs/source"
+}
+,
+{
+  "name": "0.0.0.0",
+  "version": "0.0.0.0",
+  "url": "https://martinpdes.github.io/TypedUnits/docs/0.0.0.0"
 }
 ]
