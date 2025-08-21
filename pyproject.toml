@@ -30,7 +30,8 @@ keywords = [
 
 dependencies = [
     "pint",
-    'numpy'
+    'numpy',
+    'matplotlib'
 ]
 
 [project.urls]

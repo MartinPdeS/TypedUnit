@@ -23,6 +23,7 @@ def setup(app):
 
 autodoc_mock_imports = [
     'numpy',
+    'matplotlib',
     'numpydoc',
 ]
 
@@ -52,6 +53,7 @@ html_favicon = "_static/thumbnail.png"
 sphinx_gallery_conf = {
     'examples_dirs': ['../examples'],
     'gallery_dirs': ['gallery'],
+    'image_scrapers': ('matplotlib'),
     'ignore_pattern': '/__',
     'filename_pattern': r'.*\.py',
     'plot_gallery': True,
