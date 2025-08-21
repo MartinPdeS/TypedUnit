@@ -24,6 +24,7 @@ requirements:
     - pip
   run:
     - pint
+    - numpy
 
 
 about:
