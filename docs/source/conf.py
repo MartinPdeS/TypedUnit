@@ -4,7 +4,6 @@
 import sys
 import os
 from sphinx_gallery.sorting import FileNameSortKey
-from MPSPlots.styles import use_mpsplots_style
 from pathlib import Path
 import TypedUnits
 from TypedUnits.directories import doc_css_path
@@ -51,10 +50,6 @@ html_logo = "_static/thumbnail.png"
 html_favicon = "_static/thumbnail.png"
 
 
-def reset_mpl(gallery_conf, fname):
-    use_mpsplots_style()
-
-
 sphinx_gallery_conf = {
     'examples_dirs': ['../examples'],
     'gallery_dirs': ['gallery'],
@@ -64,7 +59,6 @@ sphinx_gallery_conf = {
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
     'download_all_examples': False,
-    'reset_modules': reset_mpl,
     'line_numbers': False,
     'remove_config_comments': True,
     'capture_repr': ('_repr_html_', '__repr__'),
