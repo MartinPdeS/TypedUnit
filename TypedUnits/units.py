@@ -3,30 +3,20 @@ from pint import Quantity, UnitRegistry
 
 ureg = UnitRegistry()
 
-_scaled_units_str_list = [
-    'watt', 'volt', 'meter', 'second', 'liter', 'hertz', 'ohm', 'ampere', 'joule', 'coulomb', 'kelvin', 'celsius', 'degree', 'particle'
-]
+# _scaled_units_str_list = [
+#     'watt', 'volt', 'meter', 'second', 'liter', 'hertz', 'ohm', 'ampere', 'joule', 'coulomb', 'kelvin', 'celsius', 'degree', 'particle'
+# ]
 
-for _units_str in _scaled_units_str_list:
-    for scale in ['femto', 'pico', 'nano', 'micro', 'milli', '', 'kilo', 'mega']:
-        _unit = scale + _units_str
-        globals()[_unit] = getattr(ureg, _unit)
+# for _units_str in _scaled_units_str_list:
+#     for scale in ['femto', 'pico', 'nano', 'micro', 'milli', '', 'kilo', 'mega']:
+#         _unit = scale + _units_str
+#         globals()[_unit] = getattr(ureg, _unit)
 
 
 ureg.define("photoelectron = [Float64]")  # Define a custom unit 'photoelectron'
 ureg.define("event = [Int64]")  # Define a custom unit 'events'
 ureg.define("sqrt_hertz = Hz**0.5")
 ureg.define("bit_bins = ![Int64]")
-
-
-dB = ureg.dB
-pascal = ureg.pascal
-minute = ureg.minute
-dimensionless = ureg.dimensionless
-bit_bins = ureg.bit_bins
-sqrt_hertz = ureg.sqrt_hertz
-photoelectron = ureg.photoelectron
-event = ureg.event
 
 class UnitMeta(type):
     """
