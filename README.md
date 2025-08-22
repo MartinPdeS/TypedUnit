@@ -4,10 +4,10 @@
 
 | Name                |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
 |-------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
-| TypedUnit/helper.py |       15 |        5 |       10 |        2 |     56% | 11, 14-17 |
-| TypedUnit/units.py  |       51 |        1 |        4 |        1 |     96% |        21 |
+| TypedUnit/helper.py |       45 |       12 |       24 |        5 |     67% |16-18, 22-23, 48, 50, 54-58 |
+| TypedUnit/units.py  |       98 |       21 |       12 |        2 |     74% |21, 26-33, 37-43, 46-50, 58 |
 | TypedUnit/utils.py  |        0 |        0 |        0 |        0 |    100% |           |
-|           **TOTAL** |   **66** |    **6** |   **14** |    **3** | **84%** |           |
+|           **TOTAL** |  **143** |   **33** |   **36** |    **7** | **71%** |           |
 
 
 ## Setup coverage badge
