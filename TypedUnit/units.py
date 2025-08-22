@@ -18,19 +18,47 @@ class UnitMeta(type):
             return False
         expected = getattr(cls, "_expected_dim", None)
         if expected is None:
-            return False
+            return True
         # Use pint's dimensionality check; accepts strings like "energy"
         return obj.check(expected)
+
+    def __truediv__(cls, other):
+        if not (isinstance(other, UnitMeta) and issubclass(other, BaseUnit)):
+            return NotImplemented
+        num = cls.__name__
+        den = other.__name__
+        name = f"{num}Per{den}"
+        expected = f"{getattr(cls, '_expected_dim')}/{getattr(other, '_expected_dim')}"
+        # Create a new subclass that uses the same metaclass
+        return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
+
+    # (Optional) multiplication, powers, etc., if you ever want them.
+    def __mul__(cls, other):
+        if not (isinstance(other, UnitMeta) and issubclass(other, BaseUnit)):
+            return NotImplemented
+        a = cls.__name__
+        b = other.__name__
+        name = f"{a}Times{b}"
+        expected = f"({getattr(cls, '_expected_dim')})*({getattr(other, '_expected_dim')})"
+        return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
+
+    def __pow__(cls, power):
+        if not isinstance(power, int):
+            return NotImplemented
+        name = f"{cls.__name__}Pow{power}"
+        expected = f"({getattr(cls, '_expected_dim')})**{power}"
+        return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
 class BaseUnit(metaclass=UnitMeta):
     _expected_dim: str | None = None
 
     @classmethod
     def check(cls, value):
+        if cls._expected_dim is None:
+            return value
         assert isinstance(value, Quantity), f"Expected a pint Quantity instance, got {type(value)}"
         assert value.check(cls._expected_dim), f"Value units {value.dimensionality} do not match {cls.__name__} units"
         return value
-
 
 class Energy(BaseUnit):
     """Quantity specifically for energy units."""
@@ -92,5 +120,87 @@ class Dimensionless(BaseUnit):
     """Quantity specifically for dimensionless units."""
     _expected_dim = ""
 
+class Responsitivity(BaseUnit):
+    """Quantity specifically for responsitivity units."""
+    _expected_dim = "ampere / watt"
+
+class Viscosity(BaseUnit):
+    """Quantity specifically for viscosity units."""
+    _expected_dim = "pascal * second"
+
+class Area(BaseUnit):
+    """Quantity specifically for viscosity units."""
+    _expected_dim = "meter * meter"
+
+class ElectricField(BaseUnit):
+    """Quantity specifically for electric field units."""
+    _expected_dim = "volt / meter"
+
+class Velocity(BaseUnit):
+    """Quantity specifically for velocity units."""
+    _expected_dim = "meter / second"
+
+class Ohm(BaseUnit):
+    """Quantity specifically for resistance units."""
+    _expected_dim = "ohm"
+
+class Concentration(BaseUnit):
+    """Quantity specifically for concentration units."""
+    _expected_dim = "particle / liter"
+
+class Particle(BaseUnit):
+    """Quantity specifically for particle units."""
+    _expected_dim = "particle"
+
+class ParticleFlux(BaseUnit):
+    """Quantity specifically for particle flux units."""
+    _expected_dim = "particle / second"
+
+class Any(BaseUnit):
+    """Quantity that can have any unit."""
+    _expected_dim = None  # Accept any dimensionality
+
+class AnyUnit(BaseUnit):
+    """Quantity that can have any unit."""
+    _expected_dim = None  # Accept any dimensionality
+
+ureg.AU = ureg.dimensionless
 
 
+
+
+
+
+
+
+
+
+
+# from pydantic.dataclasses import dataclass
+
+# config_dict = dict(
+#     arbitrary_types_allowed=True,
+#     kw_only=True,
+#     slots=True,
+#     extra='forbid'
+# )
+
+
+
+
+# @dataclass(config=config_dict)
+# class Sphere():
+#     name: str
+#     refractive_index: RefractiveIndex
+#     diameter: Length
+#     particle_count: Particle
+
+
+# test = Sphere(
+#     name="Test Sphere",
+#     refractive_index=1 * ureg.refractive_index_units,
+#     diameter=1 * ureg.meter,
+#     particle_count=1 * 5e9 * ureg.particle / ureg.milliliter
+# )
+
+# print(test)
