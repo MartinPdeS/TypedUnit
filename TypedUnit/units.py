@@ -4,6 +4,7 @@ from pint import Quantity, UnitRegistry
 import pint_pandas as pint
 
 ureg = UnitRegistry()
+ureg.setup_matplotlib()
 
 _pint.set_application_registry(ureg)
 
