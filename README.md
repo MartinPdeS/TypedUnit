@@ -5,7 +5,7 @@
 | Name                |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
 |-------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
 | TypedUnit/helper.py |       15 |        5 |       10 |        2 |     56% | 11, 14-17 |
-| TypedUnit/units.py  |       51 |        1 |        4 |        1 |     96% |        31 |
+| TypedUnit/units.py  |       51 |        1 |        4 |        1 |     96% |        21 |
 | TypedUnit/utils.py  |        0 |        0 |        0 |        0 |    100% |           |
 |           **TOTAL** |   **66** |    **6** |   **14** |    **3** | **84%** |           |
 
