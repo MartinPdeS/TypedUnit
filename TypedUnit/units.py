@@ -1,7 +1,11 @@
 # Initialize a unit registry
+import pint as _pint
 from pint import Quantity, UnitRegistry
+import pint_pandas as pint
 
 ureg = UnitRegistry()
+
+_pint.set_application_registry(ureg)
 
 ureg.define("photoelectron = [Float64]")  # Define a custom unit 'photoelectron'
 ureg.define("event = [Int64]")  # Define a custom unit 'events'

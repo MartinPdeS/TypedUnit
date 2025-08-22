@@ -25,6 +25,7 @@ requirements:
   run:
     - pint
     - numpy
+    - pint_pandas
 
 
 about:

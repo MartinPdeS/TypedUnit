@@ -31,7 +31,8 @@ keywords = [
 dependencies = [
     "pint",
     'numpy',
-    'matplotlib'
+    'matplotlib',
+    'pint_pandas'
 ]
 
 [project.urls]
