@@ -13,11 +13,41 @@ ureg.define("event = [Int64]")  # Define a custom unit 'events'
 ureg.define("sqrt_hertz = Hz**0.5")
 ureg.define("bit_bins = ![Int64]")
 
+__all__ = [
+    "Energy",
+    "Time",
+    "Power",
+    "Voltage",
+    "Current",
+    "Resistance",
+    "Temperature",
+    "Length",
+    "Volume",
+    "FlowRate",
+    "Frequency",
+    "Angle",
+    "Mass",
+    "RefractiveIndex",
+    "Dimensionless",
+    "Responsitivity",
+    "Viscosity",
+    "Area",
+    "ElectricField",
+    "Velocity",
+    "Ohm",
+    "Concentration",
+    "Particle",
+    "ParticleFlux",
+    "AnyUnit",
+]
+
+
 class UnitMeta(type):
     """
     Metaclass that makes isinstance(x, SomeUnit) return True
     when x is a pint.Quantity with the right dimensionality.
     """
+
     def __instancecheck__(cls, obj):
         if not isinstance(obj, Quantity):
             return False
@@ -44,7 +74,9 @@ class UnitMeta(type):
         a = cls.__name__
         b = other.__name__
         name = f"{a}Times{b}"
-        expected = f"({getattr(cls, '_expected_dim')})*({getattr(other, '_expected_dim')})"
+        expected = (
+            f"({getattr(cls, '_expected_dim')})*({getattr(other, '_expected_dim')})"
+        )
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
     def __pow__(cls, power):
@@ -54,6 +86,7 @@ class UnitMeta(type):
         expected = f"({getattr(cls, '_expected_dim')})**{power}"
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
+
 class BaseUnit(metaclass=UnitMeta):
     _expected_dim: str | None = None
 
@@ -61,151 +94,163 @@ class BaseUnit(metaclass=UnitMeta):
     def check(cls, value):
         if cls._expected_dim is None:
             return value
-        assert isinstance(value, Quantity), f"Expected a pint Quantity instance, got {type(value)}"
-        assert value.check(cls._expected_dim), f"Value units {value.dimensionality} do not match {cls.__name__} units"
+        assert isinstance(
+            value, Quantity
+        ), f"Expected a pint Quantity instance, got {type(value)}"
+        assert value.check(
+            cls._expected_dim
+        ), f"Value units {value.dimensionality} do not match {cls.__name__} units"
         return value
+
 
 class Energy(BaseUnit):
     """Quantity specifically for energy units."""
+
     _expected_dim = "joule"
+
 
 class Time(BaseUnit):
     """Quantity specifically for time units."""
+
     _expected_dim = "second"
+
 
 class Power(BaseUnit):
     """Quantity specifically for power units."""
+
     _expected_dim = "watt"
+
 
 class Voltage(BaseUnit):
     """Quantity specifically for voltage units."""
+
     _expected_dim = "volt"
+
 
 class Current(BaseUnit):
     """Quantity specifically for current units."""
+
     _expected_dim = "ampere"
+
 
 class Resistance(BaseUnit):
     """Quantity specifically for resistance units."""
+
     _expected_dim = "ohm"
+
 
 class Temperature(BaseUnit):
     """Quantity specifically for temperature units."""
+
     _expected_dim = "kelvin"
+
 
 class Length(BaseUnit):
     """Quantity specifically for length units."""
+
     _expected_dim = "meter"
+
 
 class Volume(BaseUnit):
     """Quantity specifically for volume units."""
+
     _expected_dim = "liter"
+
 
 class FlowRate(BaseUnit):
     """Quantity specifically for flow rate units."""
+
     _expected_dim = "liter / second"
+
 
 class Frequency(BaseUnit):
     """Quantity specifically for frequency units."""
+
     _expected_dim = "hertz"
+
 
 class Angle(BaseUnit):
     """Quantity specifically for angle units."""
+
     _expected_dim = "degree"
+
 
 class Mass(BaseUnit):
     """Quantity specifically for mass units."""
+
     _expected_dim = "kilogram"
+
 
 class RefractiveIndex(BaseUnit):
     """Quantity specifically for refractive index units."""
+
     _expected_dim = "refractive_index_units"
+
 
 class Dimensionless(BaseUnit):
     """Quantity specifically for dimensionless units."""
+
     _expected_dim = ""
+
 
 class Responsitivity(BaseUnit):
     """Quantity specifically for responsitivity units."""
+
     _expected_dim = "ampere / watt"
+
 
 class Viscosity(BaseUnit):
     """Quantity specifically for viscosity units."""
+
     _expected_dim = "pascal * second"
+
 
 class Area(BaseUnit):
     """Quantity specifically for viscosity units."""
+
     _expected_dim = "meter * meter"
+
 
 class ElectricField(BaseUnit):
     """Quantity specifically for electric field units."""
+
     _expected_dim = "volt / meter"
+
 
 class Velocity(BaseUnit):
     """Quantity specifically for velocity units."""
+
     _expected_dim = "meter / second"
+
 
 class Ohm(BaseUnit):
     """Quantity specifically for resistance units."""
+
     _expected_dim = "ohm"
+
 
 class Concentration(BaseUnit):
     """Quantity specifically for concentration units."""
+
     _expected_dim = "particle / liter"
+
 
 class Particle(BaseUnit):
     """Quantity specifically for particle units."""
+
     _expected_dim = "particle"
+
 
 class ParticleFlux(BaseUnit):
     """Quantity specifically for particle flux units."""
+
     _expected_dim = "particle / second"
 
-class Any(BaseUnit):
-    """Quantity that can have any unit."""
-    _expected_dim = None  # Accept any dimensionality
 
 class AnyUnit(BaseUnit):
     """Quantity that can have any unit."""
+
     _expected_dim = None  # Accept any dimensionality
 
+
 ureg.AU = ureg.dimensionless
-
-
-
-
-
-
-
-
-
-
-
-# from pydantic.dataclasses import dataclass
-
-# config_dict = dict(
-#     arbitrary_types_allowed=True,
-#     kw_only=True,
-#     slots=True,
-#     extra='forbid'
-# )
-
-
-
-
-# @dataclass(config=config_dict)
-# class Sphere():
-#     name: str
-#     refractive_index: RefractiveIndex
-#     diameter: Length
-#     particle_count: Particle
-
-
-# test = Sphere(
-#     name="Test Sphere",
-#     refractive_index=1 * ureg.refractive_index_units,
-#     diameter=1 * ureg.meter,
-#     particle_count=1 * 5e9 * ureg.particle / ureg.milliliter
-# )
-
-# print(test)

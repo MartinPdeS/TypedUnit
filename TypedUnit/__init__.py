@@ -7,3 +7,4 @@ except ImportError:
 
 from .units import *
 from .helper import validate_units
+from .units import ureg, Quantity
