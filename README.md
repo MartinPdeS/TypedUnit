@@ -2,12 +2,13 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnit/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
-|-------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
-| TypedUnit/helper.py |       45 |       12 |       24 |        5 |     67% |16-18, 22-23, 48, 50, 54-58 |
-| TypedUnit/units.py  |      101 |       21 |       12 |        2 |     74% |56, 61-68, 72-80, 83-87, 96 |
-| TypedUnit/utils.py  |        0 |        0 |        0 |        0 |    100% |           |
-|           **TOTAL** |  **146** |   **33** |   **36** |    **7** | **71%** |           |
+| Name                |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
+|-------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
+| TypedUnit/helper.py |       45 |       12 |       24 |        5 |     66.67% |16-18, 22-23, 48, 50, 54-58 |
+| TypedUnit/units.py  |      101 |       21 |       12 |        2 |     74.34% |56, 61-68, 72-80, 83-87, 96 |
+|           **TOTAL** |  **146** |   **33** |   **36** |    **7** | **71.43%** |           |
+
+1 file skipped due to complete coverage.
 
 
 ## Setup coverage badge
