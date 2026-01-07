@@ -96,7 +96,7 @@ class BaseUnit(metaclass=UnitMeta):
             return value
         assert isinstance(
             value, Quantity
-        ), f"Expected a pint Quantity instance, got {type(value)}"
+        ), f"Expected a pint Quantity [{cls._expected_dim}] instance, got {type(value)}"
         assert value.check(
             cls._expected_dim
         ), f"Value units {value.dimensionality} do not match {cls.__name__} units"
