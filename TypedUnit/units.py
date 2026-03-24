@@ -12,6 +12,8 @@ ureg.define("photoelectron = [Float64]")  # Define a custom unit 'photoelectron'
 ureg.define("event = [Int64]")  # Define a custom unit 'events'
 ureg.define("sqrt_hertz = Hz**0.5")
 ureg.define("bit_bins = ![Int64]")
+ureg.define("dB_per_Hz = dB / hertz")
+
 
 __all__ = [
     "Energy",
