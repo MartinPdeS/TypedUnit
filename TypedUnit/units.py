@@ -3,7 +3,7 @@ import pint as _pint
 from pint import Quantity, UnitRegistry
 import pint_pandas as pint
 
-ureg = UnitRegistry()
+ureg = UnitRegistry(autoconvert_offset_to_baseunit=True)
 ureg.setup_matplotlib()
 
 _pint.set_application_registry(ureg)
