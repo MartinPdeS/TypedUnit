@@ -14,9 +14,14 @@
 !.gitignore
 !.pre-commit-config.yaml
 !LICENSE
-!meta.yaml
+!conda.recipe
+!conda.recipe/meta.yaml
 !pyproject.toml
 !README.rst
+!CONTRIBUTING.md
+!/Makefile
+!tools
+!tools/*.py
 !notebook.ipynb
 !CMakeLists.txt
 !pytest.ini
@@ -31,5 +36,6 @@ docs/source/gallery/
 *.DS_Store*
 *.so*
 *.a*
+!Makefile
 
 # Package specifics
