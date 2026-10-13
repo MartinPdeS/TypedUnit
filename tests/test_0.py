@@ -11,28 +11,28 @@ This module tests all core functionality including:
 - Integration features
 """
 
-import pytest
 import numpy
+import pytest
 
 # Import the TypedUnits components
 from TypedUnit import (
-    Energy,
-    Time,
-    Power,
-    Voltage,
+    Angle,
     Current,
-    Resistance,
-    Temperature,
-    Length,
-    Volume,
+    Dimensionless,
+    Energy,
     FlowRate,
     Frequency,
+    Length,
     Mass,
-    Angle,
-    RefractiveIndex,
-    Dimensionless,
-    ureg,
+    Power,
     Quantity,
+    RefractiveIndex,
+    Resistance,
+    Temperature,
+    Time,
+    Voltage,
+    Volume,
+    ureg,
     validate_units,
 )
 
@@ -285,12 +285,13 @@ def test_basic_function_validation():
     assert isinstance(result, Quantity)
     assert result.check("watt")
 
-    # Invalid inputs should raise Exception
+    # Invalid dimensions should raise ValueError
     length = 50 * ureg.meter
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError, match="Parameter 'energy'") as error:
         calculate_power(length, time)  # Wrong first parameter
+    assert isinstance(error.value.__cause__, AssertionError)
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         calculate_power(energy, length)  # Wrong second parameter
 
 
@@ -310,7 +311,7 @@ def test_electrical_calculation_validation():
 
     # Test with wrong units
     energy = 100 * ureg.joule
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         calculate_resistance(energy, current)
 
 

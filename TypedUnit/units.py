@@ -1,7 +1,7 @@
 # Initialize a unit registry
 import pint as _pint
+import pint_pandas as pint  # noqa: F401 -- Registers the pandas Pint extension.
 from pint import Quantity, UnitRegistry
-import pint_pandas as pint
 
 ureg = UnitRegistry(autoconvert_offset_to_baseunit=True)
 ureg.setup_matplotlib()
@@ -65,7 +65,7 @@ class UnitMeta(type):
         num = cls.__name__
         den = other.__name__
         name = f"{num}Per{den}"
-        expected = f"{getattr(cls, '_expected_dim')}/{getattr(other, '_expected_dim')}"
+        expected = f"{cls._expected_dim}/{other._expected_dim}"
         # Create a new subclass that uses the same metaclass
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
@@ -76,16 +76,14 @@ class UnitMeta(type):
         a = cls.__name__
         b = other.__name__
         name = f"{a}Times{b}"
-        expected = (
-            f"({getattr(cls, '_expected_dim')})*({getattr(other, '_expected_dim')})"
-        )
+        expected = f"({cls._expected_dim})*({other._expected_dim})"
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
     def __pow__(cls, power):
         if not isinstance(power, int):
             return NotImplemented
         name = f"{cls.__name__}Pow{power}"
-        expected = f"({getattr(cls, '_expected_dim')})**{power}"
+        expected = f"({cls._expected_dim})**{power}"
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
 

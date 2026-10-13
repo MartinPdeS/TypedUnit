@@ -1,6 +1,8 @@
-from TypedUnit.units import BaseUnit
-from typing import get_type_hints, get_origin, get_args, Union
 import inspect
+from typing import Union, get_args, get_origin, get_type_hints
+
+from TypedUnit.units import BaseUnit
+
 
 def _get_unit_type(hint):
     """Extract BaseUnit type from hint, handling Optional and List."""
@@ -14,15 +16,24 @@ def _get_unit_type(hint):
     if origin is Union:
         # Handle Optional[BaseUnit] (Union[BaseUnit, None])
         unit_types = [arg for arg in args if arg is not type(None)]
-        if len(unit_types) == 1 and inspect.isclass(unit_types[0]) and issubclass(unit_types[0], BaseUnit):
+        if (
+            len(unit_types) == 1
+            and inspect.isclass(unit_types[0])
+            and issubclass(unit_types[0], BaseUnit)
+        ):
             return unit_types[0], True, False  # Optional BaseUnit
 
     elif origin in (list, tuple):
         # Handle List[BaseUnit] or Tuple[BaseUnit]
-        if len(args) == 1 and inspect.isclass(args[0]) and issubclass(args[0], BaseUnit):
+        if (
+            len(args) == 1
+            and inspect.isclass(args[0])
+            and issubclass(args[0], BaseUnit)
+        ):
             return args[0], False, True  # List of BaseUnit
 
     return None, False, False
+
 
 def validate_units(function):
     def wrapper(*args, **kwargs):
@@ -55,13 +66,14 @@ def validate_units(function):
                     try:
                         unit_type.check(item)
                     except (AssertionError, ValueError) as e:
-                        raise ValueError(f"Parameter '{param_name}[{i}]': {e}")
+                        raise ValueError(f"Parameter '{param_name}[{i}]': {e}") from e
             else:
                 # Handle single values
                 try:
                     unit_type.check(value)
                 except (AssertionError, ValueError) as e:
-                    raise ValueError(f"Parameter '{param_name}': {e}")
+                    raise ValueError(f"Parameter '{param_name}': {e}") from e
 
         return function(*args, **kwargs)
+
     return wrapper
