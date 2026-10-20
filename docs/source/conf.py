@@ -11,7 +11,8 @@ from martinpdes_docs import configure
 
 package_name = "TypedUnit"
 version = os.getenv("tag", "latest")
-thumbnail = str(Path(__file__).parent / "_static" / "thumbnail.png")
+logo = "../images/logo.png"
+thumbnail = str(Path(__file__).parent.parent / "images" / "logo.png")
 
 globals().update(
     configure(
@@ -19,8 +20,8 @@ globals().update(
         package=package_name,
         repository="MartinPdeS/TypedUnit",
         version=version,
-        logo="_static/logo.svg",
-        favicon="_static/favicon.svg",
+        logo=logo,
+        favicon=logo,
         sphinx_gallery_conf={
             "default_thumb_file": thumbnail,
             "within_subsection_order": FileNameSortKey,
