@@ -1,11 +1,32 @@
-TypedUnits
+TypedUnit
 ===========
 
-|python| |docs| |coverage| |PyPi| |PyPi_download|
+|logo|
+
+.. list-table::
+   :widths: 35 65
+   :header-rows: 1
+
+   * - Badge
+     - Status
+   * - Python versions
+     - |python|
+   * - Documentation
+     - |docs|
+   * - Continuous integration
+     - |ci/cd|
+   * - Test coverage
+     - |coverage|
+   * - PyPI package
+     - |PyPI|
+   * - PyPI downloads
+     - |PyPI_download|
+   * - Anaconda package
+     - |anaconda|
 
 **Type-safe physical units for Python**
 
-TypedUnits is a Python library that extends Pint with type safety and validation capabilities. It allows you to create unit-aware types that work seamlessly with Python's type system and provide runtime validation for physical quantities.
+TypedUnit is a Python library that extends Pint with type safety and validation capabilities. It allows you to create unit-aware types that work seamlessly with Python's type system and provide runtime validation for physical quantities.
 
 **Key Features:**
 
@@ -20,7 +41,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 .. code-block:: python
 
-   from TypedUnits import Energy, Time, Power, validate, ureg
+   from TypedUnit import Energy, Time, Power, validate, ureg
 
    # Normal Pint instantiation
    energy = 100 * ureg.joule
@@ -49,7 +70,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 .. code-block:: bash
 
-   pip install TypedUnits
+   pip install TypedUnit
 
 ----
 
@@ -59,7 +80,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 .. code-block:: python
 
-   from TypedUnits import Energy, Length, Mass, ureg
+   from TypedUnit import Energy, Length, Mass, ureg
 
    # Create quantities the normal way
    kinetic_energy = 0.5 * 10 * ureg.kilogram * (5 * ureg.meter / ureg.second)**2
@@ -77,7 +98,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 .. code-block:: python
 
-   from TypedUnits import validate_units, Energy, Time, Power
+   from TypedUnit import validate_units, Energy, Time, Power
 
    @validate_units
    def calculate_work(power: Power, time: Time) -> Energy:
@@ -93,7 +114,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 .. code-block:: python
 
-   from TypedUnits import Energy, Length, Mass
+   from TypedUnit import Energy, Length, Mass
    from pydantic.dataclasses import dataclass
 
    @dataclass
@@ -113,7 +134,7 @@ TypedUnits is a Python library that extends Pint with type safety and validation
 
 **Available Unit Types**
 
-TypedUnits includes common physical unit types:
+TypedUnit includes common physical unit types:
 
 - **Mechanical**: `Energy`, `Power`, `Force`, `Pressure`
 - **Spatial**: `Length`, `Area`, `Volume`, `Angle`
@@ -131,7 +152,7 @@ TypedUnits includes common physical unit types:
 
 .. code-block:: python
 
-   from TypedUnits import create_unit_type
+   from TypedUnit import create_unit_type
 
    # Create your own unit types
    MagneticField = create_unit_type('MagneticField', '[magnetic_flux_density]')
@@ -143,7 +164,7 @@ TypedUnits includes common physical unit types:
 
 .. code-block:: python
 
-   from TypedUnits import validate_enhanced
+   from TypedUnit import validate_enhanced
 
    @validate_enhanced(strict_mode=False, convert_types=True)
    def flexible_function(energy: Energy, count: int) -> str:
@@ -164,8 +185,8 @@ TypedUnits includes common physical unit types:
 
 .. code-block:: bash
 
-   git clone https://github.com/MartinPdeS/TypedUnits.git
-   cd TypedUnits
+   git clone https://github.com/MartinPdeS/TypedUnit.git
+   cd TypedUnit
    pip install -e ".[testing]"
    pytest
 
@@ -173,28 +194,40 @@ TypedUnits includes common physical unit types:
 
 **Contributing**
 
-TypedUnits is open source and contributions are welcome! Whether you're fixing bugs, adding new unit types, or improving documentation, your help is appreciated.
+TypedUnit is open source and contributions are welcome! Whether you're fixing bugs, adding new unit types, or improving documentation, your help is appreciated.
 
 **Author:** `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdeS>`_
 
-**Email:** `martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=TypedUnits>`_
+**Email:** `martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=TypedUnit>`_
 
-.. |python| image:: https://img.shields.io/pypi/pyversions/typedunits.svg
+.. |logo| image:: https://github.com/MartinPdeS/TypedUnit/raw/master/docs/images/logo.png
+   :target: https://github.com/MartinPdeS/TypedUnit
+   :alt: TypedUnit logo
+
+.. |python| image:: https://img.shields.io/pypi/pyversions/typedunit.svg
    :target: https://www.python.org/
    :alt: Python version
 
-.. |PyPi| image:: https://badge.fury.io/py/TypedUnits.svg
-   :target: https://pypi.org/project/TypedUnits/
-   :alt: PyPi
+.. |PyPI| image:: https://badge.fury.io/py/typedunit.svg
+   :target: https://pypi.org/project/typedunit/
+   :alt: PyPI
 
-.. |PyPi_download| image:: https://img.shields.io/pypi/dm/typedunits.svg
-   :target: https://pypistats.org/packages/typedunits
-   :alt: PyPi download statistics
+.. |PyPi_download| image:: https://img.shields.io/pypi/dm/typedunit.svg
+   :target: https://pypistats.org/packages/typedunit
+   :alt: PyPI download statistics
 
-.. |docs| image:: https://github.com/martinpdes/typedunits/actions/workflows/deploy_documentation.yml/badge.svg
-   :target: https://martinpdes.github.io/TypedUnits/
+.. |docs| image:: https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_documentation.yml/badge.svg
+   :target: https://martinpdes.github.io/TypedUnit/
    :alt: Documentation Status
 
-.. |coverage| image:: https://raw.githubusercontent.com/MartinPdeS/TypedUnits/python-coverage-comment-action-data/badge.svg
-   :target: https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnits/blob/python-coverage-comment-action-data/htmlcov/index.html
+.. |ci/cd| image:: https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_coverage.yml/badge.svg
+   :target: https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_coverage.yml
+   :alt: Continuous integration status
+
+.. |coverage| image:: https://raw.githubusercontent.com/MartinPdeS/TypedUnit/python-coverage-comment-action-data/badge.svg
+   :target: https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnit/blob/python-coverage-comment-action-data/htmlcov/index.html
    :alt: Unittest coverage
+
+.. |anaconda| image:: https://anaconda.org/martinpdes/typedunit/badges/version.svg
+   :target: https://anaconda.org/martinpdes/typedunit
+   :alt: Anaconda package
