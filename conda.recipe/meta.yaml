@@ -23,7 +23,7 @@ requirements:
     - pip
   run:
     - python >=3.10
-    - pint
+    - pint >=0.24,<0.26
     - numpy
     - matplotlib
     - pint-pandas
