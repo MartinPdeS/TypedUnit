@@ -179,8 +179,6 @@ TypedUnits is open source and contributions are welcome! Whether you're fixing b
 
 **Email:** `martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=TypedUnits>`_
 
-----
-
 .. |python| image:: https://img.shields.io/pypi/pyversions/typedunits.svg
    :target: https://www.python.org/
    :alt: Python version
