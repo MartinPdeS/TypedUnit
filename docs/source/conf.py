@@ -22,6 +22,7 @@ globals().update(
         version=version,
         logo=logo,
         favicon=logo,
+        html_theme_options={"show_nav_level": 1},
         sphinx_gallery_conf={
             "default_thumb_file": thumbnail,
             "within_subsection_order": FileNameSortKey,
