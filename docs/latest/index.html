@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>TypedUnits &#8212; TypedUnits  documentation</title>
+    <title>TypedUnit &#8212; TypedUnits  documentation</title>
   
   
   
@@ -433,11 +433,46 @@
                 <article class="bd-article">
                   
   <p><strong>Date</strong>: Oct 20, 2026, <strong>Version</strong>: latest</p>
-<section id="typedunits">
-<h1>TypedUnits<a class="headerlink" href="#typedunits" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://www.python.org/"><img alt="Python version" src="https://img.shields.io/pypi/pyversions/typedunits.svg" /></a> <a class="reference external" href="https://martinpdes.github.io/TypedUnits/"><img alt="Documentation Status" src="https://github.com/martinpdes/typedunits/actions/workflows/deploy_documentation.yml/badge.svg" /></a> <a class="reference external" href="https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnits/blob/python-coverage-comment-action-data/htmlcov/index.html"><img alt="Unittest coverage" src="https://raw.githubusercontent.com/MartinPdeS/TypedUnits/python-coverage-comment-action-data/badge.svg" /></a> <a class="reference external" href="https://pypi.org/project/TypedUnits/"><img alt="PyPi" src="https://badge.fury.io/py/TypedUnits.svg" /></a> <a class="reference external" href="https://pypistats.org/packages/typedunits"><img alt="PyPi download statistics" src="https://img.shields.io/pypi/dm/typedunits.svg" /></a></p>
+<section id="typedunit">
+<h1>TypedUnit<a class="headerlink" href="#typedunit" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://github.com/MartinPdeS/TypedUnit"><img alt="TypedUnit logo" src="https://github.com/MartinPdeS/TypedUnit/raw/master/docs/images/logo.png" /></a></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Badge</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python versions</p></td>
+<td><p><a class="reference external" href="https://www.python.org/"><img alt="Python version" src="https://img.shields.io/pypi/pyversions/typedunit.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Documentation</p></td>
+<td><p><a class="reference external" href="https://martinpdes.github.io/TypedUnit/"><img alt="Documentation Status" src="https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_documentation.yml/badge.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Continuous integration</p></td>
+<td><p><a class="reference external" href="https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_coverage.yml"><img alt="Continuous integration status" src="https://github.com/MartinPdeS/TypedUnit/actions/workflows/deploy_coverage.yml/badge.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Test coverage</p></td>
+<td><p><a class="reference external" href="https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnit/blob/python-coverage-comment-action-data/htmlcov/index.html"><img alt="Unittest coverage" src="https://raw.githubusercontent.com/MartinPdeS/TypedUnit/python-coverage-comment-action-data/badge.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>PyPI package</p></td>
+<td><p><a class="reference external" href="https://pypi.org/project/typedunit/"><img alt="PyPI" src="https://badge.fury.io/py/typedunit.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>PyPI downloads</p></td>
+<td><p><a class="reference external" href="https://pypistats.org/packages/typedunit"><img alt="PyPI download statistics" src="https://img.shields.io/pypi/dm/typedunit.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Anaconda package</p></td>
+<td><p><a class="reference external" href="https://anaconda.org/martinpdes/typedunit"><img alt="Anaconda package" src="https://anaconda.org/martinpdes/typedunit/badges/version.svg" /></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>Type-safe physical units for Python</strong></p>
-<p>TypedUnits is a Python library that extends Pint with type safety and validation capabilities. It allows you to create unit-aware types that work seamlessly with Python’s type system and provide runtime validation for physical quantities.</p>
+<p>TypedUnit is a Python library that extends Pint with type safety and validation capabilities. It allows you to create unit-aware types that work seamlessly with Python’s type system and provide runtime validation for physical quantities.</p>
 <p><strong>Key Features:</strong></p>
 <ul class="simple">
 <li><p><strong>Type Safety</strong>: Use <cite>isinstance()</cite> checks with unit types like <cite>Energy</cite>, <cite>Time</cite>, <cite>Power</cite></p></li>
@@ -447,7 +482,7 @@
 </ul>
 <hr class="docutils" />
 <p><strong>Quick Example</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">Power</span><span class="p">,</span> <span class="n">validate</span><span class="p">,</span> <span class="n">ureg</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">Power</span><span class="p">,</span> <span class="n">validate</span><span class="p">,</span> <span class="n">ureg</span>
 
 <span class="c1"># Normal Pint instantiation</span>
 <span class="n">energy</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">joule</span>
@@ -473,13 +508,13 @@
 </div>
 <hr class="docutils" />
 <p><strong>Installation</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>TypedUnits
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>TypedUnit
 </pre></div>
 </div>
 <hr class="docutils" />
 <p><strong>Basic Usage</strong></p>
 <p><strong>Unit Type Checking</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Mass</span><span class="p">,</span> <span class="n">ureg</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Mass</span><span class="p">,</span> <span class="n">ureg</span>
 
 <span class="c1"># Create quantities the normal way</span>
 <span class="n">kinetic_energy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">kilogram</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">meter</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">second</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
@@ -495,7 +530,7 @@
 </pre></div>
 </div>
 <p><strong>Function Validation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_units</span><span class="p">,</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">Power</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_units</span><span class="p">,</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">Power</span>
 
 <span class="nd">@validate_units</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_work</span><span class="p">(</span><span class="n">power</span><span class="p">:</span> <span class="n">Power</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">Time</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Energy</span><span class="p">:</span>
@@ -509,7 +544,7 @@
 </pre></div>
 </div>
 <p><strong>Pydantic Integration</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Mass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Mass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic.dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
@@ -528,7 +563,7 @@
 </div>
 <hr class="docutils" />
 <p><strong>Available Unit Types</strong></p>
-<p>TypedUnits includes common physical unit types:</p>
+<p>TypedUnit includes common physical unit types:</p>
 <ul class="simple">
 <li><p><strong>Mechanical</strong>: <cite>Energy</cite>, <cite>Power</cite>, <cite>Force</cite>, <cite>Pressure</cite></p></li>
 <li><p><strong>Spatial</strong>: <cite>Length</cite>, <cite>Area</cite>, <cite>Volume</cite>, <cite>Angle</cite></p></li>
@@ -541,7 +576,7 @@
 <hr class="docutils" />
 <p><strong>Advanced Features</strong></p>
 <p><strong>Custom Unit Types</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_unit_type</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_unit_type</span>
 
 <span class="c1"># Create your own unit types</span>
 <span class="n">MagneticField</span> <span class="o">=</span> <span class="n">create_unit_type</span><span class="p">(</span><span class="s1">'MagneticField'</span><span class="p">,</span> <span class="s1">'[magnetic_flux_density]'</span><span class="p">)</span>
@@ -551,7 +586,7 @@
 </pre></div>
 </div>
 <p><strong>Flexible Validation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnits</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_enhanced</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_enhanced</span>
 
 <span class="nd">@validate_enhanced</span><span class="p">(</span><span class="n">strict_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">convert_types</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">flexible_function</span><span class="p">(</span><span class="n">energy</span><span class="p">:</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -568,17 +603,17 @@
 </ul>
 <hr class="docutils" />
 <p><strong>Testing</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MartinPdeS/TypedUnits.git
-<span class="nb">cd</span><span class="w"> </span>TypedUnits
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MartinPdeS/TypedUnit.git
+<span class="nb">cd</span><span class="w"> </span>TypedUnit
 pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[testing]"</span>
 pytest
 </pre></div>
 </div>
 <hr class="docutils" />
 <p><strong>Contributing</strong></p>
-<p>TypedUnits is open source and contributions are welcome! Whether you’re fixing bugs, adding new unit types, or improving documentation, your help is appreciated.</p>
+<p>TypedUnit is open source and contributions are welcome! Whether you’re fixing bugs, adding new unit types, or improving documentation, your help is appreciated.</p>
 <p><strong>Author:</strong> <a class="reference external" href="https://github.com/MartinPdeS">Martin Poinsinet de Sivry-Houle</a></p>
-<p><strong>Email:</strong> <a class="reference external" href="mailto:martin&#46;poinsinet-de-sivry&#37;&#52;&#48;polymtl&#46;ca?subject=TypedUnits">martin<span>&#46;</span>poinsinet-de-sivry<span>&#64;</span>polymtl<span>&#46;</span>ca</a></p>
+<p><strong>Email:</strong> <a class="reference external" href="mailto:martin&#46;poinsinet-de-sivry&#37;&#52;&#48;polymtl&#46;ca?subject=TypedUnit">martin<span>&#46;</span>poinsinet-de-sivry<span>&#64;</span>polymtl<span>&#46;</span>ca</a></p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
