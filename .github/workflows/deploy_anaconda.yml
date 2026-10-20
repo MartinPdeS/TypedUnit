@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   publish:
-    uses: MartinPdeS/MPSActions/.github/workflows/publish_compiled_package_to_anaconda.yml@v6
+    uses: MartinPdeS/MPSActions/.github/workflows/publish_compiled_package_to_anaconda.yml@a01969bc5af90666281f9d37acffdf6a4629763a
     with:
       # One noarch archive supports all declared Python versions; test it on 3.14.
       python_versions: '["3.14"]'
