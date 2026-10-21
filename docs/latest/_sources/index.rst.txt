@@ -62,28 +62,11 @@ at library boundaries and keep registry ownership explicit.
 
 .. toctree::
     :maxdepth: 2
-    :caption: Learn
+    :hidden:
 
-    guide/installation
-    guide/quickstart
-    guide/concepts
-    guide/validation
-    guide/pint
-    theory
-
-.. toctree::
-    :maxdepth: 2
-    :caption: API reference
-
-    units
-    code
-    references
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Examples
-
-    gallery/index
+    Guide <guide>
+    Reference <reference>
+    Examples <gallery/index>
 
 Indices and tables
 ==================
