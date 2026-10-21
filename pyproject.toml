@@ -56,11 +56,6 @@ testing = [
 
 documentation = [
     "MartinPdeS-docs>=0.2.5,<0.3",
-    "numpydoc ~=1.8",
-    "sphinx >=6",
-    "sphinx-gallery ~=0.17",
-    "sphinx-rtd-theme >=2,<4",
-    "pydata-sphinx-theme ~=0.15"
 ]
 
 [tool.ruff]
