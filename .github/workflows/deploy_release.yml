@@ -10,7 +10,7 @@ permissions:
 jobs:
   pypi:
     name: Publish to PyPI
-    uses: MartinPdeS/MPSActions/.github/workflows/publish_pure_package_to_PyPi.yml@a01969bc5af90666281f9d37acffdf6a4629763a
+    uses: MartinPdeS/MPSActions/.github/workflows/publish_pure_package_to_PyPi.yml@v7
     with:
       python-version: "3.11"
       test-command: python -c 'import TypedUnit; print(TypedUnit.__version__)'
@@ -19,7 +19,7 @@ jobs:
 
   conda:
     name: Publish Conda package
-    uses: MartinPdeS/MPSActions/.github/workflows/publish_compiled_package_to_anaconda.yml@a01969bc5af90666281f9d37acffdf6a4629763a
+    uses: MartinPdeS/MPSActions/.github/workflows/publish_compiled_package_to_anaconda.yml@v7
     with:
       python_versions: '["3.14"]'
       os_list: '["ubuntu-latest"]'
