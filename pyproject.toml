@@ -42,7 +42,6 @@ Documentation = "https://martinpdes.github.io/TypedUnit/"
 Repository = "https://github.com/MartinPdeS/TypedUnit.git"
 
 [tool.setuptools_scm]
-write_to = "TypedUnit/_version.py"
 version_scheme = "only-version"
 local_scheme = "no-local-version"
 
