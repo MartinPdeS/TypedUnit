@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel", "setuptools_scm[toml]>=8.0"]
+requires = ["setuptools>=40.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "TypedUnit"
-dynamic = ["version"]
+version = "0.2.16"
 description = "A package wrapping pint for handling typed units in Python."
 license = {file = "LICENSE"}
 readme = "README.rst"
@@ -41,11 +41,8 @@ Homepage = "https://github.com/MartinPdeS/TypedUnit"
 Documentation = "https://martinpdes.github.io/TypedUnit/"
 Repository = "https://github.com/MartinPdeS/TypedUnit.git"
 
-[tool.setuptools_scm]
-version_scheme = "only-version"
-local_scheme = "no-local-version"
-
 [project.optional-dependencies]
+release = ["martinpdes-maintenance==0.2.2"]
 testing = [
     "pytest >=7.4,<10.0",
     "pytest-cov >=2,<7",
@@ -60,8 +57,13 @@ documentation = [
 
 [tool.ruff]
 target-version = "py310"
-# SCM owns this file; lint the maintained sources instead of generated version code.
+# The release helper maintains the version file.
 extend-exclude = ["TypedUnit/_version.py"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "B"]
+
+[tool.mps-maintenance]
+version-file = "TypedUnit/_version.py"
+version-method = "literal"
+conda-recipe = "conda.recipe/meta.yaml"
