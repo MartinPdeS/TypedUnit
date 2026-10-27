@@ -15,6 +15,7 @@ globals().update(
     configure(
         project="TypedUnits",
         package=package_name,
+        version="auto",
         repository="MartinPdeS/TypedUnit",
         logo=logo,
         favicon=favicon,
