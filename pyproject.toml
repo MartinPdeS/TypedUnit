@@ -42,18 +42,13 @@ Documentation = "https://martinpdes.github.io/TypedUnit/"
 Repository = "https://github.com/MartinPdeS/TypedUnit.git"
 
 [project.optional-dependencies]
-release = ["martinpdes-maintenance==0.2.2"]
-testing = [
-    "pytest >=7.4,<10.0",
-    "pytest-cov >=2,<7",
-    "pytest-json-report ~=1.5",
-    "flake8 ==7.3.0",
-    "coverage ~=7.6"
-]
+release = ["martinpdes-maintenance==0.2.3"]
+testing = ["martinpdes-maintenance[testing]==0.2.3", "pytest-json-report ~=1.5", "pytest-cov<7", "coverage ~=7.6"]
 
 documentation = [
     "MartinPdeS-docs>=0.4.0,<0.5",
 ]
+dev = ["martinpdes-maintenance[quality]==0.2.3", "flake8 ==7.3.0"]
 
 [tool.ruff]
 target-version = "py310"
