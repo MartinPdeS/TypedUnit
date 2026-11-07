@@ -8,3 +8,4 @@ from TypedUnit.helper import validate_units as validate_units
 from TypedUnit.units import *  # noqa: F403 -- Re-export the unit module's public types.
 from TypedUnit.units import Quantity as Quantity
 from TypedUnit.units import ureg as ureg
+from TypedUnit.validation import validate_quantity  # noqa: F401 -- public API
