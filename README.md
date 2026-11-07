@@ -6,9 +6,9 @@
 |-------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
 | TypedUnit/helper.py |       45 |       12 |       24 |        5 |     66.67% |18-24, 28-33, 59, 61, 65-69 |
 | TypedUnit/units.py  |      102 |       21 |       12 |        2 |     74.56% |58, 63-70, 74-80, 83-87, 96 |
-| **TOTAL**           |  **147** |   **33** |   **36** |    **7** | **71.58%** |           |
+| **TOTAL**           |  **164** |   **33** |   **48** |    **7** | **75.47%** |           |
 
-1 file skipped due to complete coverage.
+2 files skipped due to complete coverage.
 
 
 ## Setup coverage badge
