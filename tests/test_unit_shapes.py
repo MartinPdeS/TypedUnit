@@ -7,16 +7,19 @@ import pint
 import pytest
 
 from TypedUnit import (
+    Dimensionless,
     Finite,
     Float,
     Matrix,
     Negative,
     NonZero,
+    NoUnit,
     Positive,
     Scalar,
     Vector,
     Watt,
     unit_validator,
+    validate_annotation,
     validate_units,
 )
 
@@ -176,3 +179,22 @@ def test_finite_constraint_accepts_finite_complex_values() -> None:
 
     with pytest.raises(ValueError, match="must be finite"):
         finite(complex(np.inf, 0.0) * registry.watt)
+
+
+def test_validate_annotation_accepts_no_unit_and_compatible_unions() -> None:
+    """Direct validation handles bare scalars and dimensionless quantities."""
+    registry = pint.UnitRegistry()
+
+    validate_annotation(1.5, annotation=NoUnit[Scalar], name="index")
+    validate_annotation(1.5, annotation=Dimensionless | NoUnit, name="value")
+    validate_annotation(
+        50 * registry.percent, annotation=Dimensionless | NoUnit, name="value"
+    )
+
+    with pytest.raises(ValueError, match="must not have units"):
+        validate_annotation(1 * registry.watt, annotation=NoUnit[Scalar], name="index")
+
+    with pytest.raises(ValueError, match="must have units compatible"):
+        validate_annotation(
+            1 * registry.second, annotation=Dimensionless | NoUnit, name="value"
+        )
