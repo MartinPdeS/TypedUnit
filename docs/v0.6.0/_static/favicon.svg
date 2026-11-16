@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" role="img" aria-labelledby="title desc">
+<title id="title">TypedUnit</title>
+<desc id="desc">Code brackets around a blue unit symbol with a mint plus, on a light tile.</desc>
+<rect width="16" height="16" rx="3" fill="#F7FAFF"/>
+<path d="M5 3H2v10h3M11 3h3v10h-3" stroke="#122B46" stroke-width="1.5" fill="none"/>
+<path d="M6 6v4c0 1.4.7 2.2 2 2.2s2-.8 2-2.2V6" stroke="#246BFD" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+<path d="M6.5 3h3M8 1.5v3" stroke="#43E0C0" stroke-width="1.2"/>
+</svg>
