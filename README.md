@@ -4,13 +4,13 @@
 
 | Name                    |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
 |------------------------ | -------: | -------: | -------: | -------: | ---------: | --------: |
-| TypedUnit/helper.py     |       78 |        5 |       46 |        8 |     89.52% |29, 45-\>42, 47, 64, 73, 133 |
+| TypedUnit/helper.py     |      114 |        7 |       80 |       12 |     90.21% |66, 82, 86-\>74, 129, 156, 224, 250, 264, 279-\>282, 282-\>285 |
 | TypedUnit/shapes.py     |       34 |        3 |       14 |        3 |     87.50% |31, 43, 69 |
-| TypedUnit/units.py      |      112 |       22 |       14 |        3 |     75.40% |66, 71-78, 82-88, 91-95, 124, 133 |
+| TypedUnit/units.py      |      117 |       22 |       16 |        3 |     76.69% |73, 78-85, 89-95, 98-102, 155, 164 |
 | TypedUnit/validation.py |       31 |        6 |       24 |        4 |     78.18% |71-74, 77, 90, 97 |
-| **TOTAL**               |  **255** |   **36** |   **98** |   **18** | **82.44%** |           |
+| **TOTAL**               |  **302** |   **38** |  **134** |   **22** | **84.40%** |           |
 
-1 file skipped due to complete coverage.
+2 files skipped due to complete coverage.
 
 
 ## Setup coverage badge
