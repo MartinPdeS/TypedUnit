@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "TypedUnit"
-version = "0.5.0"
+version = "0.5.1"
 description = "A package wrapping pint for handling typed units in Python."
 license = {file = "LICENSE"}
 readme = "README.rst"
