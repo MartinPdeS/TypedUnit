@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; TypedUnits 0.4.0 documentation</title>
+    <title>API reference &#8212; TypedUnits 0.5.0 documentation</title>
   
   
   
@@ -44,7 +44,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="_static/documentation_options.js?v=70f82a29"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/sg-tags.js?v=d80f6fa4"></script>
@@ -53,7 +53,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -66,7 +66,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.4.0" />
+  <meta name="docsearch:version" content="0.5.0" />
   
     
     <script src="_static/searchtools.js"></script>
@@ -504,9 +504,10 @@ for examples and design explanations.</p>
 <span class="sig-name descname"><span class="pre">unit_validator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TypedUnit/helper.html#unit_validator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.helper.unit_validator" title="Link to this definition">#</a></dt>
 <dd><p>Validate parameter quantities against unit and optional shape annotations.</p>
 <p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units.
-Subscript the unit with <code class="xref py py-class docutils literal notranslate"><span class="pre">Scalar</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code>, or
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Matrix</span></code> to also validate magnitude rank. Fixed dimensions are
-available as <code class="docutils literal notranslate"><span class="pre">Vector[n]</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix[rows,</span> <span class="pre">columns]</span></code>.</p>
+Subscript the unit with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>, <code class="docutils literal notranslate"><span class="pre">Finite</span></code>,
+<code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers to validate the magnitude. For example,
+<code class="docutils literal notranslate"><span class="pre">Watt[Float,</span> <span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative]</span></code> requires a real floating-point value
+that is nonzero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.</p>
@@ -520,8 +521,8 @@ original function. Return annotations are not validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or does not match its
-required shape.</p></li>
+<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or violates its shape
+or value constraints.</p></li>
 <li><p><strong>TypeError</strong> – If function arguments are missing or a shape annotation contains
 conflicting shape markers.</p></li>
 </ul>
@@ -534,9 +535,10 @@ conflicting shape markers.</p></li>
 <span class="sig-name descname"><span class="pre">validate_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TypedUnit.helper.validate_units" title="Link to this definition">#</a></dt>
 <dd><p>Validate parameter quantities against unit and optional shape annotations.</p>
 <p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units.
-Subscript the unit with <code class="xref py py-class docutils literal notranslate"><span class="pre">Scalar</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code>, or
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Matrix</span></code> to also validate magnitude rank. Fixed dimensions are
-available as <code class="docutils literal notranslate"><span class="pre">Vector[n]</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix[rows,</span> <span class="pre">columns]</span></code>.</p>
+Subscript the unit with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>, <code class="docutils literal notranslate"><span class="pre">Finite</span></code>,
+<code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers to validate the magnitude. For example,
+<code class="docutils literal notranslate"><span class="pre">Watt[Float,</span> <span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative]</span></code> requires a real floating-point value
+that is nonzero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.</p>
@@ -550,8 +552,8 @@ original function. Return annotations are not validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or does not match its
-required shape.</p></li>
+<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or violates its shape
+or value constraints.</p></li>
 <li><p><strong>TypeError</strong> – If function arguments are missing or a shape annotation contains
 conflicting shape markers.</p></li>
 </ul>
@@ -616,6 +618,20 @@ conflicting shape markers.</p></li>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.Finite">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Finite</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#Finite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Finite" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring every magnitude to be finite.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.Float">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Float</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#Float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Float" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring a real floating-point magnitude.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="TypedUnit.units.FlowRate">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">FlowRate</span></span><a class="reference internal" href="_modules/TypedUnit/units.html#FlowRate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.FlowRate" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code></p>
@@ -652,6 +668,20 @@ conflicting shape markers.</p></li>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.Negative">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Negative</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#Negative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Negative" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring every magnitude to be strictly negative.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.NonZero">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NonZero</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#NonZero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.NonZero" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring every magnitude to be nonzero.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="TypedUnit.units.Ohm">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Ohm</span></span><a class="reference internal" href="_modules/TypedUnit/units.html#Ohm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Ohm" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code></p>
@@ -670,6 +700,13 @@ conflicting shape markers.</p></li>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ParticleFlux</span></span><a class="reference internal" href="_modules/TypedUnit/units.html#ParticleFlux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.ParticleFlux" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code></p>
 <p>Quantity specifically for particle flux units.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.Positive">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Positive</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#Positive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Positive" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring every magnitude to be strictly positive.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -822,14 +859,19 @@ conflicting shape markers.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Dimensionless"><code class="docutils literal notranslate"><span class="pre">Dimensionless</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.ElectricField"><code class="docutils literal notranslate"><span class="pre">ElectricField</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Energy"><code class="docutils literal notranslate"><span class="pre">Energy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Finite"><code class="docutils literal notranslate"><span class="pre">Finite</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Float"><code class="docutils literal notranslate"><span class="pre">Float</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.FlowRate"><code class="docutils literal notranslate"><span class="pre">FlowRate</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Frequency"><code class="docutils literal notranslate"><span class="pre">Frequency</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Length"><code class="docutils literal notranslate"><span class="pre">Length</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Mass"><code class="docutils literal notranslate"><span class="pre">Mass</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Matrix"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Negative"><code class="docutils literal notranslate"><span class="pre">Negative</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.NonZero"><code class="docutils literal notranslate"><span class="pre">NonZero</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Ohm"><code class="docutils literal notranslate"><span class="pre">Ohm</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Particle"><code class="docutils literal notranslate"><span class="pre">Particle</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.ParticleFlux"><code class="docutils literal notranslate"><span class="pre">ParticleFlux</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Positive"><code class="docutils literal notranslate"><span class="pre">Positive</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Power"><code class="docutils literal notranslate"><span class="pre">Power</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.RefractiveIndex"><code class="docutils literal notranslate"><span class="pre">RefractiveIndex</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Resistance"><code class="docutils literal notranslate"><span class="pre">Resistance</span></code></a></li>
@@ -850,7 +892,7 @@ conflicting shape markers.</p></li>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.4.0/docs/source/code.rst">
+    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.5.0/docs/source/code.rst">
       <i class="fa-solid fa-pencil"></i>
       
       

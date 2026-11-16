@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TypedUnit.units &#8212; TypedUnits 0.4.0 documentation</title>
+    <title>TypedUnit.units &#8212; TypedUnits 0.5.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=1437fa6d"></script>
+    <script src="../../_static/documentation_options.js?v=70f82a29"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -52,7 +52,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -63,7 +63,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.4.0" />
+  <meta name="docsearch:version" content="0.5.0" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -469,12 +469,14 @@
                   
   <h1>Source code for TypedUnit.units</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Initialize a unit registry</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnionType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pint</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_pint</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pint_pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pint</span>  <span class="c1"># noqa: F401 -- Registers the pandas Pint extension.</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pint</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">UnitRegistry</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constraints</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finite</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Negative</span><span class="p">,</span> <span class="n">NonZero</span><span class="p">,</span> <span class="n">Positive</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.shapes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">,</span> <span class="n">ShapeSpec</span><span class="p">,</span> <span class="n">Vector</span>
 
 <span class="n">ureg</span> <span class="o">=</span> <span class="n">UnitRegistry</span><span class="p">(</span><span class="n">autoconvert_offset_to_baseunit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -497,6 +499,11 @@
     <span class="s2">"Scalar"</span><span class="p">,</span>
     <span class="s2">"Vector"</span><span class="p">,</span>
     <span class="s2">"Matrix"</span><span class="p">,</span>
+    <span class="s2">"Float"</span><span class="p">,</span>
+    <span class="s2">"Finite"</span><span class="p">,</span>
+    <span class="s2">"NonZero"</span><span class="p">,</span>
+    <span class="s2">"Positive"</span><span class="p">,</span>
+    <span class="s2">"Negative"</span><span class="p">,</span>
     <span class="s2">"Voltage"</span><span class="p">,</span>
     <span class="s2">"Current"</span><span class="p">,</span>
     <span class="s2">"Resistance"</span><span class="p">,</span>
@@ -569,14 +576,14 @@
     <span class="n">_expected_dim</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">__class_getitem__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Attach a runtime shape contract to a unit annotation.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__class_getitem__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">metadata</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Attach shape and value contracts to a unit annotation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        shape : type or ShapeSpec</span>
-<span class="sd">            Shape marker such as :class:`Scalar`, :class:`Vector`, or</span>
-<span class="sd">            :class:`Matrix`, optionally with fixed dimensions.</span>
+<span class="sd">        metadata : type or ShapeSpec</span>
+<span class="sd">            Shape marker, numeric marker, or sign marker. Multiple markers can</span>
+<span class="sd">            be supplied, for example ``Watt[Vector, Float, Positive]``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -586,16 +593,40 @@
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        TypeError</span>
-<span class="sd">            If ``shape`` is not a supported shape marker or specification.</span>
+<span class="sd">            If a marker is not supported.</span>
 <span class="sd">        """</span>
-        <span class="n">valid_marker</span> <span class="o">=</span> <span class="n">shape</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Scalar</span><span class="p">,</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">ShapeSpec</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_marker</span><span class="p">:</span>
+        <span class="n">valid_markers</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Scalar</span><span class="p">,</span>
+            <span class="n">Vector</span><span class="p">,</span>
+            <span class="n">Matrix</span><span class="p">,</span>
+            <span class="n">Float</span><span class="p">,</span>
+            <span class="n">Finite</span><span class="p">,</span>
+            <span class="n">NonZero</span><span class="p">,</span>
+            <span class="n">Positive</span><span class="p">,</span>
+            <span class="n">Negative</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">marker</span> <span class="ow">in</span> <span class="n">valid_markers</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">marker</span><span class="p">,</span> <span class="n">ShapeSpec</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span>
+                <span class="n">get_origin</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Union</span><span class="p">,</span> <span class="n">UnionType</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">get_args</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span>
+                    <span class="n">argument</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Positive</span><span class="p">,</span> <span class="n">Negative</span><span class="p">)</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">metadata</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">metadata</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">"Unit annotations require Scalar, Vector, Matrix, or a fixed shape specification."</span>
+                <span class="s2">"Unit annotations require shape, numeric, or sign constraint markers."</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">Annotated</span><span class="p">[</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Annotated</span><span class="p">[(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">metadata</span><span class="p">)]</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
