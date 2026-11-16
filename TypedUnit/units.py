@@ -1,10 +1,12 @@
 # Initialize a unit registry
-from typing import Annotated, Any
+from types import UnionType
+from typing import Annotated, Any, Union, get_args, get_origin
 
 import pint as _pint
 import pint_pandas as pint  # noqa: F401 -- Registers the pandas Pint extension.
 from pint import Quantity, UnitRegistry
 
+from .constraints import Finite, Float, Negative, NonZero, Positive
 from .shapes import Matrix, Scalar, ShapeSpec, Vector
 
 ureg = UnitRegistry(autoconvert_offset_to_baseunit=True)
@@ -27,6 +29,11 @@ __all__ = [
     "Scalar",
     "Vector",
     "Matrix",
+    "Float",
+    "Finite",
+    "NonZero",
+    "Positive",
+    "Negative",
     "Voltage",
     "Current",
     "Resistance",
@@ -99,14 +106,14 @@ class BaseUnit(metaclass=UnitMeta):
     _expected_dim: str | None = None
 
     @classmethod
-    def __class_getitem__(cls, shape: Any) -> Any:
-        """Attach a runtime shape contract to a unit annotation.
+    def __class_getitem__(cls, *metadata: Any) -> Any:
+        """Attach shape and value contracts to a unit annotation.
 
         Parameters
         ----------
-        shape : type or ShapeSpec
-            Shape marker such as :class:`Scalar`, :class:`Vector`, or
-            :class:`Matrix`, optionally with fixed dimensions.
+        metadata : type or ShapeSpec
+            Shape marker, numeric marker, or sign marker. Multiple markers can
+            be supplied, for example ``Watt[Vector, Float, Positive]``.
 
         Returns
         -------
@@ -116,16 +123,40 @@ class BaseUnit(metaclass=UnitMeta):
         Raises
         ------
         TypeError
-            If ``shape`` is not a supported shape marker or specification.
+            If a marker is not supported.
         """
-        valid_marker = shape in (Scalar, Vector, Matrix) or isinstance(shape, ShapeSpec)
+        if len(metadata) == 1 and isinstance(metadata[0], tuple):
+            metadata = metadata[0]
 
-        if not valid_marker:
+        valid_markers = (
+            Scalar,
+            Vector,
+            Matrix,
+            Float,
+            Finite,
+            NonZero,
+            Positive,
+            Negative,
+        )
+        valid = all(
+            marker in valid_markers
+            or isinstance(marker, ShapeSpec)
+            or (
+                get_origin(marker) in (Union, UnionType)
+                and get_args(marker)
+                and all(
+                    argument in (Positive, Negative) for argument in get_args(marker)
+                )
+            )
+            for marker in metadata
+        )
+
+        if not metadata or not valid:
             raise TypeError(
-                "Unit annotations require Scalar, Vector, Matrix, or a fixed shape specification."
+                "Unit annotations require shape, numeric, or sign constraint markers."
             )
 
-        return Annotated[cls, shape]
+        return Annotated[(cls, *metadata)]
 
     @classmethod
     def check(cls, value):

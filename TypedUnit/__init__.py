@@ -4,6 +4,11 @@ try:
 except ImportError:
     __version__ = "0.0.0"
 
+from TypedUnit.constraints import Finite as Finite
+from TypedUnit.constraints import Float as Float
+from TypedUnit.constraints import Negative as Negative
+from TypedUnit.constraints import NonZero as NonZero
+from TypedUnit.constraints import Positive as Positive
 from TypedUnit.helper import unit_validator as unit_validator
 from TypedUnit.helper import validate_units as validate_units
 from TypedUnit.shapes import Matrix as Matrix

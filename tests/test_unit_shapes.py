@@ -6,7 +6,19 @@ import numpy as np
 import pint
 import pytest
 
-from TypedUnit import Matrix, Scalar, Vector, Watt, unit_validator, validate_units
+from TypedUnit import (
+    Finite,
+    Float,
+    Matrix,
+    Negative,
+    NonZero,
+    Positive,
+    Scalar,
+    Vector,
+    Watt,
+    unit_validator,
+    validate_units,
+)
 
 
 def test_scalar_unit_annotation_checks_zero_dimensional_magnitude() -> None:
@@ -111,3 +123,56 @@ def test_unit_validator_preserves_function_metadata_and_legacy_alias() -> None:
         return power
 
     assert legacy_identity(3 * registry.watt) == 3 * registry.watt
+
+
+def test_float_and_union_sign_constraints() -> None:
+    """Float magnitudes can require either strict sign, excluding zero."""
+    registry = pint.UnitRegistry()
+
+    @unit_validator
+    def signed(value: Watt[Float, Positive | Negative]) -> None:
+        return None
+
+    signed(2.5 * registry.watt)
+    signed(-2.5 * registry.watt)
+    signed(np.array([2.5, -1.0]) * registry.watt)
+
+    with pytest.raises(ValueError, match="must be positive or negative"):
+        signed(0.0 * registry.watt)
+
+    with pytest.raises(ValueError, match="floating-point"):
+        signed(2 * registry.watt)
+
+
+def test_finite_and_nonzero_constraints() -> None:
+    """Finite rejects infinities and NaNs, while NonZero rejects zero."""
+    registry = pint.UnitRegistry()
+
+    @unit_validator
+    def finite_nonzero(value: Watt[Finite, NonZero]) -> None:
+        return None
+
+    finite_nonzero(np.array([1.0, -2.0]) * registry.watt)
+
+    with pytest.raises(ValueError, match="must be finite"):
+        finite_nonzero(np.array([1.0, np.inf]) * registry.watt)
+
+    with pytest.raises(ValueError, match="must be finite"):
+        finite_nonzero(np.nan * registry.watt)
+
+    with pytest.raises(ValueError, match="must be nonzero"):
+        finite_nonzero(np.array([1.0, 0.0]) * registry.watt)
+
+
+def test_finite_constraint_accepts_finite_complex_values() -> None:
+    """Finite is independent of the real-only Float marker."""
+    registry = pint.UnitRegistry()
+
+    @unit_validator
+    def finite(value: Watt[Finite]) -> None:
+        return None
+
+    finite((1.0 + 2.0j) * registry.watt)
+
+    with pytest.raises(ValueError, match="must be finite"):
+        finite(complex(np.inf, 0.0) * registry.watt)

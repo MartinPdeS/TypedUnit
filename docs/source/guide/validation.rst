@@ -97,3 +97,21 @@ magnitude, and ``Matrix`` a two-dimensional magnitude. Specify exact sizes with
 ``Vector[n]`` or ``Matrix[rows, columns]``. ``Power`` and ``Watt`` name the same
 unit type. Shape annotations are runtime checks; they do not provide static
 shape inference to Python type checkers.
+
+Value constraints
+-----------------
+
+Use ``Float`` to require real floating-point magnitudes, ``Finite`` to reject
+infinities and NaNs, and ``NonZero`` to reject zero. Use ``Positive`` or
+``Negative`` to constrain a value's sign. Sign markers can be combined with a
+union; each magnitude must satisfy at least one marker in that union::
+
+   from TypedUnit import Finite, Float, Negative, NonZero, Positive, Watt, unit_validator
+
+   @unit_validator
+   def signed_power(power: Watt[Float, Finite, NonZero, Positive | Negative]) -> None:
+       """Accept finite, nonzero floating-point power values."""
+
+``Positive | Negative`` accepts positive and negative values, but rejects zero.
+These markers can also be combined with shape markers such as
+``Watt[Vector[3], Float, Positive]``.
