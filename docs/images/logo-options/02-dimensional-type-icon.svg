@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
-  <title id="title">Dimensional type</title>
-  <desc id="desc">Code brackets meet the unit symbol. Built for Python.</desc>
-<path d="M85 48H48v160h37M171 48h37v160h-37" fill="none" stroke="#122B46" stroke-width="18" stroke-linejoin="round"/>
-    <path d="M101 91v59c0 21 12 33 27 33s27-12 27-33V91" fill="none" stroke="#246BFD" stroke-width="20" stroke-linecap="round"/>
-    <path d="M115 48h26" stroke="#43E0C0" stroke-width="12"/>
-    <path d="M128 35v26" stroke="#43E0C0" stroke-width="12"/>
-</svg>

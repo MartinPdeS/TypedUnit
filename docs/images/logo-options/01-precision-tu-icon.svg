@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
-  <title id="title">Precision TU</title>
-  <desc id="desc">A ruler-inspired T inside a U. Precise and distinctive.</desc>
-<ns0:rect xmlns:ns0="http://www.w3.org/2000/svg" width="256" height="256" rx="56" fill="#122B46" />
-  <ns0:path xmlns:ns0="http://www.w3.org/2000/svg" fill="#F7FAFF" d="M56 48h144v24h-60v80h-24V72H56z" />
-  <ns0:path xmlns:ns0="http://www.w3.org/2000/svg" fill="#122B46" d="M128 100h12v8h-12zm0 24h12v8h-12z" />
-  <ns0:path xmlns:ns0="http://www.w3.org/2000/svg" fill="#43E0C0" d="M56 104h24v52c0 17 21 28 48 28s48-11 48-28v-52h24v52c0 31-31 52-72 52s-72-21-72-52z" />
-
-</svg>

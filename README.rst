@@ -339,7 +339,7 @@ For other inquiries, contact
 TypedUnit is distributed under the
 `MIT license <https://github.com/MartinPdeS/TypedUnit/blob/master/LICENSE>`_.
 
-.. |logo| image:: https://github.com/MartinPdeS/TypedUnit/raw/master/docs/images/logo.png
+.. |logo| image:: https://github.com/MartinPdeS/TypedUnit/raw/master/docs/images/logo.svg
    :target: https://github.com/MartinPdeS/TypedUnit
    :alt: TypedUnit — physical quantities with readable types and runtime checks
    :width: 520px
