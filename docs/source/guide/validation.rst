@@ -67,6 +67,21 @@ values are rejected by default. Set ``finite=False`` only when the calling API
 allows non-finite sentinels and validates them separately. Incompatible units
 raise a named ``ValueError``. Validation leaves the original quantity unchanged.
 
+Validate a typed annotation directly
+------------------------------------
+
+Use ``validate_annotation`` when validation is needed outside a decorated
+function, such as while checking dataclass fields. It accepts the same
+annotations as ``@unit_validator`` and leaves conversion to the caller::
+
+   from TypedUnit import NoUnit, Scalar, validate_annotation
+
+   validate_annotation(
+       value=1.33,
+       annotation=NoUnit[Scalar],
+       name="background_refractive_index",
+   )
+
 Validate array shapes in annotations
 -------------------------------------
 
@@ -115,3 +130,26 @@ union; each magnitude must satisfy at least one marker in that union::
 ``Positive | Negative`` accepts positive and negative values, but rejects zero.
 These markers can also be combined with shape markers such as
 ``Watt[Vector[3], Float, Positive]``.
+
+Bare values without units
+-------------------------
+
+Use ``NoUnit`` when an API requires plain numeric values and must reject Pint
+quantities. It composes with the same shape and value markers::
+
+   from TypedUnit import Float, NoUnit, Positive, Scalar, unit_validator
+
+   @unit_validator
+   def refractive_index(value: NoUnit[Scalar, Float, Positive]) -> None:
+       """Accept a bare positive floating-point refractive index."""
+
+``NoUnit`` rejects quantities, including Pint's dimensionless quantities.
+Use ``Dimensionless`` when dimensionless quantities such as percentages are
+valid inputs. Combine them when either bare values or dimensionless quantities
+are accepted::
+
+   from TypedUnit import Dimensionless, NoUnit, unit_validator
+
+   @unit_validator
+   def normalized(value: Dimensionless | NoUnit) -> None:
+       """Accept bare values or quantities with dimensionless units."""

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Checked quantity</title>
+  <desc id="desc">A U and a check mark. Quantity validation at a glance.</desc>
+<rect width="256" height="256" rx="128" fill="#122B46"/>
+    <path d="M65 78v72c0 31 25 53 56 53s56-22 56-53v-22" fill="none" stroke="#F7FAFF" stroke-width="24" stroke-linecap="round"/>
+    <path d="m122 95 25 25 50-56" fill="none" stroke="#43E0C0" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

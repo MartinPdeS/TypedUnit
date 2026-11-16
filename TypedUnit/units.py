@@ -34,6 +34,7 @@ __all__ = [
     "NonZero",
     "Positive",
     "Negative",
+    "NoUnit",
     "Voltage",
     "Current",
     "Resistance",
@@ -102,6 +103,81 @@ class UnitMeta(type):
         return UnitMeta(name, (BaseUnit,), {"_expected_dim": expected})
 
 
+def _typed_annotation(cls: type, metadata: tuple[Any, ...]) -> Any:
+    """Create an annotation carrying shape and value validation metadata.
+
+    Parameters
+    ----------
+    cls : type
+        Unit class or no-unit marker being annotated.
+    metadata : tuple
+        Shape and value constraint markers.
+
+    Returns
+    -------
+    typing.Annotated
+        Annotation consumed by :func:`unit_validator`.
+
+    Raises
+    ------
+    TypeError
+        If a marker is not supported.
+    """
+    if len(metadata) == 1 and isinstance(metadata[0], tuple):
+        metadata = metadata[0]
+
+    valid_markers = (
+        Scalar,
+        Vector,
+        Matrix,
+        Float,
+        Finite,
+        NonZero,
+        Positive,
+        Negative,
+    )
+    valid = all(
+        marker in valid_markers
+        or isinstance(marker, ShapeSpec)
+        or (
+            get_origin(marker) in (Union, UnionType)
+            and get_args(marker)
+            and all(argument in (Positive, Negative) for argument in get_args(marker))
+        )
+        for marker in metadata
+    )
+
+    if not metadata or not valid:
+        raise TypeError(
+            "Annotations require shape, numeric, or sign constraint markers."
+        )
+
+    return Annotated[(cls, *metadata)]
+
+
+class NoUnit:
+    """Marker requiring bare numeric values without Pint units.
+
+    Use ``NoUnit[Scalar, Float]`` to require a bare floating-point scalar.
+    """
+
+    @classmethod
+    def __class_getitem__(cls, *metadata: Any) -> Any:
+        """Attach shape and value constraints to this marker.
+
+        Parameters
+        ----------
+        metadata : type or ShapeSpec
+            Shape, numeric, or sign constraint markers.
+
+        Returns
+        -------
+        typing.Annotated
+            No-unit annotation consumed by :func:`unit_validator`.
+        """
+        return _typed_annotation(cls, metadata)
+
+
 class BaseUnit(metaclass=UnitMeta):
     _expected_dim: str | None = None
 
@@ -125,38 +201,7 @@ class BaseUnit(metaclass=UnitMeta):
         TypeError
             If a marker is not supported.
         """
-        if len(metadata) == 1 and isinstance(metadata[0], tuple):
-            metadata = metadata[0]
-
-        valid_markers = (
-            Scalar,
-            Vector,
-            Matrix,
-            Float,
-            Finite,
-            NonZero,
-            Positive,
-            Negative,
-        )
-        valid = all(
-            marker in valid_markers
-            or isinstance(marker, ShapeSpec)
-            or (
-                get_origin(marker) in (Union, UnionType)
-                and get_args(marker)
-                and all(
-                    argument in (Positive, Negative) for argument in get_args(marker)
-                )
-            )
-            for marker in metadata
-        )
-
-        if not metadata or not valid:
-            raise TypeError(
-                "Unit annotations require shape, numeric, or sign constraint markers."
-            )
-
-        return Annotated[(cls, *metadata)]
+        return _typed_annotation(cls, metadata)
 
     @classmethod
     def check(cls, value):
