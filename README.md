@@ -2,13 +2,15 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/MartinPdeS/TypedUnit/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
-|-------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
-| TypedUnit/helper.py |       45 |       12 |       24 |        5 |     66.67% |18-24, 28-33, 59, 61, 65-69 |
-| TypedUnit/units.py  |      102 |       21 |       12 |        2 |     74.56% |58, 63-70, 74-80, 83-87, 96 |
-| **TOTAL**           |  **164** |   **33** |   **48** |    **7** | **75.47%** |           |
+| Name                    |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
+|------------------------ | -------: | -------: | -------: | -------: | ---------: | --------: |
+| TypedUnit/helper.py     |       78 |        5 |       46 |        8 |     89.52% |29, 45-\>42, 47, 64, 73, 133 |
+| TypedUnit/shapes.py     |       34 |        3 |       14 |        3 |     87.50% |31, 43, 69 |
+| TypedUnit/units.py      |      112 |       22 |       14 |        3 |     75.40% |66, 71-78, 82-88, 91-95, 124, 133 |
+| TypedUnit/validation.py |       31 |        6 |       24 |        4 |     78.18% |71-74, 77, 90, 97 |
+| **TOTAL**               |  **255** |   **36** |   **98** |   **18** | **82.44%** |           |
 
-2 files skipped due to complete coverage.
+1 file skipped due to complete coverage.
 
 
 ## Setup coverage badge
