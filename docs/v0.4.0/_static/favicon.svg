@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">TypedUnit icon</title>
+  <defs>
+    <linearGradient id="unit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5031c8"/>
+      <stop offset="1" stop-color="#ff5c72"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="54" fill="#201747"/>
+  <path d="M70 76H186M70 180H186M82 76V180M174 76V180" fill="none" stroke="#fff8fb" stroke-width="12" stroke-linecap="round"/>
+  <path d="M104 103V153M152 103V153M104 128H152" fill="none" stroke="url(#unit)" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="104" cy="103" r="8" fill="#ffb16b"/>
+</svg>

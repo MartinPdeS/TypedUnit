@@ -5,9 +5,9 @@ Decorate a function after adding TypedUnit annotations:
 
 .. code-block:: python
 
-   from TypedUnit import Energy, Time, validate_units, ureg
+   from TypedUnit import Energy, Time, unit_validator, ureg
 
-   @validate_units
+   @unit_validator
    def energy_rate(energy: Energy, time: Time, label: str = "run"):
        return energy / time, label
 
@@ -23,9 +23,9 @@ Optional and collection inputs
 .. code-block:: python
 
    from typing import Optional
-   from TypedUnit import Length, Time, validate_units, ureg
+   from TypedUnit import Length, Time, unit_validator, ureg
 
-   @validate_units
+   @unit_validator
    def summarize(points: list[Length], elapsed: Optional[Time] = None):
        return len(points), elapsed
 
@@ -36,7 +36,7 @@ Pydantic
 --------
 
 TypedUnit classes can be used as annotations in Pydantic dataclasses or
-models. Use ``@validate_units`` on calculation functions that accept those
+models. Use ``@unit_validator`` on calculation functions that accept those
 fields when an explicit function boundary is useful.
 
 Validate a quantity directly
@@ -44,7 +44,7 @@ Validate a quantity directly
 
 Use ``validate_quantity`` when an API needs to check dimensions, shape, or
 values without converting or replacing the quantity. It is separate from the
-``validate_units`` decorator:
+``unit_validator`` decorator:
 
 .. code-block:: python
 
@@ -63,5 +63,37 @@ values without converting or replacing the quantity. It is separate from the
 The registry argument is optional; specifying it rejects quantities created
 by other registries. Use ``shape=(3,)`` for a three-element vector, omit shape
 to accept any shape, and use ``nonnegative=True`` to allow zero. Nonfinite
-values are always rejected. Pint raises its usual dimensionality error for
-incompatible units. Validation leaves the original quantity unchanged.
+values are rejected by default. Set ``finite=False`` only when the calling API
+allows non-finite sentinels and validates them separately. Incompatible units
+raise a named ``ValueError``. Validation leaves the original quantity unchanged.
+
+Validate array shapes in annotations
+-------------------------------------
+
+Subscript a unit class with a shape marker to validate the quantity's
+magnitude rank as well as its units:
+
+.. code-block:: python
+
+   import numpy as np
+   from TypedUnit import Matrix, Scalar, Vector, Watt, unit_validator, ureg
+
+   @unit_validator
+   def process(
+       total: Watt[Scalar],
+       samples: Watt[Vector],
+       covariance: Watt[Matrix[3, 3]],
+   ):
+       return total, samples, covariance
+
+   process(
+       2 * ureg.watt,
+       np.ones(10) * ureg.watt,
+       np.eye(3) * ureg.watt,
+   )
+
+``Scalar`` requires a zero-dimensional magnitude, ``Vector`` a one-dimensional
+magnitude, and ``Matrix`` a two-dimensional magnitude. Specify exact sizes with
+``Vector[n]`` or ``Matrix[rows, columns]``. ``Power`` and ``Watt`` name the same
+unit type. Shape annotations are runtime checks; they do not provide static
+shape inference to Python type checkers.

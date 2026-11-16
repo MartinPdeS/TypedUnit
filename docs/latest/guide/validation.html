@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Validating function inputs &#8212; TypedUnits 0.3.0 documentation</title>
+    <title>Validating function inputs &#8212; TypedUnits 0.4.0 documentation</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/default.css?v=265c6c44" />
     <link rel="stylesheet" type="text/css" href="../_static/martinpdes_layout.css?v=a8cc01cd" />
   
@@ -44,16 +44,16 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=f129cdf0"></script>
+    <script src="../_static/documentation_options.js?v=1437fa6d"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guide/validation';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -66,7 +66,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.3.0" />
+  <meta name="docsearch:version" content="0.4.0" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -500,9 +500,9 @@
   <section id="validating-function-inputs">
 <h1>Validating function inputs<a class="headerlink" href="#validating-function-inputs" title="Link to this heading">#</a></h1>
 <p>Decorate a function after adding TypedUnit annotations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">validate_units</span><span class="p">,</span> <span class="n">ureg</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">unit_validator</span><span class="p">,</span> <span class="n">ureg</span>
 
-<span class="nd">@validate_units</span>
+<span class="nd">@unit_validator</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">energy_rate</span><span class="p">(</span><span class="n">energy</span><span class="p">:</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"run"</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">energy</span> <span class="o">/</span> <span class="n">time</span><span class="p">,</span> <span class="n">label</span>
 </pre></div>
@@ -514,9 +514,9 @@ values are not checked.</p>
 <h2>Optional and collection inputs<a class="headerlink" href="#optional-and-collection-inputs" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Optional</span></code> unit values and homogeneous lists or tuples are supported:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">validate_units</span><span class="p">,</span> <span class="n">ureg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">unit_validator</span><span class="p">,</span> <span class="n">ureg</span>
 
-<span class="nd">@validate_units</span>
+<span class="nd">@unit_validator</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Length</span><span class="p">],</span> <span class="n">elapsed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Time</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">),</span> <span class="n">elapsed</span>
 </pre></div>
@@ -527,14 +527,14 @@ collection, its index. A required <code class="docutils literal notranslate"><sp
 <section id="pydantic">
 <h2>Pydantic<a class="headerlink" href="#pydantic" title="Link to this heading">#</a></h2>
 <p>TypedUnit classes can be used as annotations in Pydantic dataclasses or
-models. Use <code class="docutils literal notranslate"><span class="pre">&#64;validate_units</span></code> on calculation functions that accept those
+models. Use <code class="docutils literal notranslate"><span class="pre">&#64;unit_validator</span></code> on calculation functions that accept those
 fields when an explicit function boundary is useful.</p>
 </section>
 <section id="validate-a-quantity-directly">
 <h2>Validate a quantity directly<a class="headerlink" href="#validate-a-quantity-directly" title="Link to this heading">#</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">validate_quantity</span></code> when an API needs to check dimensions, shape, or
 values without converting or replacing the quantity. It is separate from the
-<code class="docutils literal notranslate"><span class="pre">validate_units</span></code> decorator:</p>
+<code class="docutils literal notranslate"><span class="pre">unit_validator</span></code> decorator:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">validate_quantity</span>
 
 <span class="n">wavelength</span> <span class="o">=</span> <span class="mi">850</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">nanometer</span>
@@ -551,8 +551,37 @@ values without converting or replacing the quantity. It is separate from the
 <p>The registry argument is optional; specifying it rejects quantities created
 by other registries. Use <code class="docutils literal notranslate"><span class="pre">shape=(3,)</span></code> for a three-element vector, omit shape
 to accept any shape, and use <code class="docutils literal notranslate"><span class="pre">nonnegative=True</span></code> to allow zero. Nonfinite
-values are always rejected. Pint raises its usual dimensionality error for
-incompatible units. Validation leaves the original quantity unchanged.</p>
+values are rejected by default. Set <code class="docutils literal notranslate"><span class="pre">finite=False</span></code> only when the calling API
+allows non-finite sentinels and validates them separately. Incompatible units
+raise a named <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. Validation leaves the original quantity unchanged.</p>
+</section>
+<section id="validate-array-shapes-in-annotations">
+<h2>Validate array shapes in annotations<a class="headerlink" href="#validate-array-shapes-in-annotations" title="Link to this heading">#</a></h2>
+<p>Subscript a unit class with a shape marker to validate the quantity’s
+magnitude rank as well as its units:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">,</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">Watt</span><span class="p">,</span> <span class="n">unit_validator</span><span class="p">,</span> <span class="n">ureg</span>
+
+<span class="nd">@unit_validator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span>
+    <span class="n">total</span><span class="p">:</span> <span class="n">Watt</span><span class="p">[</span><span class="n">Scalar</span><span class="p">],</span>
+    <span class="n">samples</span><span class="p">:</span> <span class="n">Watt</span><span class="p">[</span><span class="n">Vector</span><span class="p">],</span>
+    <span class="n">covariance</span><span class="p">:</span> <span class="n">Watt</span><span class="p">[</span><span class="n">Matrix</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span>
+<span class="p">):</span>
+    <span class="k">return</span> <span class="n">total</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">covariance</span>
+
+<span class="n">process</span><span class="p">(</span>
+    <span class="mi">2</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">watt</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">watt</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">ureg</span><span class="o">.</span><span class="n">watt</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Scalar</span></code> requires a zero-dimensional magnitude, <code class="docutils literal notranslate"><span class="pre">Vector</span></code> a one-dimensional
+magnitude, and <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> a two-dimensional magnitude. Specify exact sizes with
+<code class="docutils literal notranslate"><span class="pre">Vector[n]</span></code> or <code class="docutils literal notranslate"><span class="pre">Matrix[rows,</span> <span class="pre">columns]</span></code>. <code class="docutils literal notranslate"><span class="pre">Power</span></code> and <code class="docutils literal notranslate"><span class="pre">Watt</span></code> name the same
+unit type. Shape annotations are runtime checks; they do not provide static
+shape inference to Python type checkers.</p>
 </section>
 </section>
 
@@ -606,6 +635,7 @@ incompatible units. Validation leaves the original quantity unchanged.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-and-collection-inputs">Optional and collection inputs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-a-quantity-directly">Validate a quantity directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-array-shapes-in-annotations">Validate array shapes in annotations</a></li>
 </ul>
   </nav></div>
 
@@ -613,7 +643,7 @@ incompatible units. Validation leaves the original quantity unchanged.</p>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.3.0/docs/source/guide/validation.rst">
+    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.4.0/docs/source/guide/validation.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
