@@ -32,21 +32,21 @@ def test_registry_is_optional_but_explicit_registry_is_enforced() -> None:
     first = pint.UnitRegistry()
     second = pint.UnitRegistry()
     validate_quantity(value=1 * first.mm, unit="m", name="length")
-    with pytest.raises(TypeError, match="specified unit registry"):
+    with pytest.raises(ValueError, match="specified unit registry"):
         validate_quantity(
             value=1 * first.mm,
             unit="m",
             name="length",
             registry=second,
         )
-    with pytest.raises(TypeError, match="length"):
+    with pytest.raises(ValueError, match="length"):
         validate_quantity(value=1, unit="m", name="length")
 
 
 def test_units_and_shape_are_checked() -> None:
-    """Wrong dimensions propagate Pint errors and scalar shape is explicit."""
+    """Wrong dimensions and scalar shape produce labeled value errors."""
     registry = pint.UnitRegistry()
-    with pytest.raises(pint.DimensionalityError):
+    with pytest.raises(ValueError, match="compatible"):
         validate_quantity(value=1 * registry.second, unit="m", name="length")
     with pytest.raises(ValueError, match="shape"):
         validate_quantity(
@@ -79,6 +79,19 @@ def test_sign_requirements_apply_to_every_element() -> None:
             name="length",
             nonnegative=True,
         )
+
+
+def test_nonfinite_values_can_be_deferred_to_the_calling_api() -> None:
+    """An API may allow sentinels while validating them with its own contract."""
+    registry = pint.UnitRegistry()
+    value = np.array([np.nan, 1.0]) * registry.watt
+
+    validate_quantity(
+        value=value,
+        unit="watt",
+        name="power",
+        finite=False,
+    )
 
 
 def test_existing_validate_units_decorator_remains_available() -> None:

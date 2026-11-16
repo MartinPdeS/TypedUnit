@@ -31,7 +31,7 @@ TypedUnit is a Python library that extends Pint with type safety and validation 
 **Key Features:**
 
 - **Type Safety**: Use `isinstance()` checks with unit types like `Energy`, `Time`, `Power`
-- **Automatic Validation**: Function decorators for unit validation based on type annotations
+- **Automatic Validation**: Function decorators validate units and optional array-shape annotations
 - **Pydantic Integration**: Full compatibility with Pydantic dataclasses and models
 - **Normal Pint Usage**: Keep your existing Pint code - just add type safety on top
 
@@ -41,7 +41,7 @@ TypedUnit is a Python library that extends Pint with type safety and validation 
 
 .. code-block:: python
 
-   from TypedUnit import Energy, Time, Power, validate, ureg
+   from TypedUnit import Energy, Time, Power, unit_validator, ureg
 
    # Normal Pint instantiation
    energy = 100 * ureg.joule
@@ -51,7 +51,7 @@ TypedUnit is a Python library that extends Pint with type safety and validation 
    assert isinstance(energy, Energy)  # True
    assert isinstance(time, Time)      # True
 
-   @validate_units
+   @unit_validator
    def calculate_power(energy: Energy, time: Time) -> Power:
        """Function with automatic unit validation."""
        return (energy / time).to(ureg.watt)

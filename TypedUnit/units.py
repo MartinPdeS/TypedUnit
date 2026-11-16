@@ -1,7 +1,11 @@
 # Initialize a unit registry
+from typing import Annotated, Any
+
 import pint as _pint
 import pint_pandas as pint  # noqa: F401 -- Registers the pandas Pint extension.
 from pint import Quantity, UnitRegistry
+
+from .shapes import Matrix, Scalar, ShapeSpec, Vector
 
 ureg = UnitRegistry(autoconvert_offset_to_baseunit=True)
 ureg.setup_matplotlib()
@@ -19,6 +23,10 @@ __all__ = [
     "Energy",
     "Time",
     "Power",
+    "Watt",
+    "Scalar",
+    "Vector",
+    "Matrix",
     "Voltage",
     "Current",
     "Resistance",
@@ -91,6 +99,35 @@ class BaseUnit(metaclass=UnitMeta):
     _expected_dim: str | None = None
 
     @classmethod
+    def __class_getitem__(cls, shape: Any) -> Any:
+        """Attach a runtime shape contract to a unit annotation.
+
+        Parameters
+        ----------
+        shape : type or ShapeSpec
+            Shape marker such as :class:`Scalar`, :class:`Vector`, or
+            :class:`Matrix`, optionally with fixed dimensions.
+
+        Returns
+        -------
+        typing.Annotated
+            Annotation carrying this unit class and the requested shape.
+
+        Raises
+        ------
+        TypeError
+            If ``shape`` is not a supported shape marker or specification.
+        """
+        valid_marker = shape in (Scalar, Vector, Matrix) or isinstance(shape, ShapeSpec)
+
+        if not valid_marker:
+            raise TypeError(
+                "Unit annotations require Scalar, Vector, Matrix, or a fixed shape specification."
+            )
+
+        return Annotated[cls, shape]
+
+    @classmethod
     def check(cls, value):
         if cls._expected_dim is None:
             return value
@@ -119,6 +156,10 @@ class Power(BaseUnit):
     """Quantity specifically for power units."""
 
     _expected_dim = "watt"
+
+
+Watt = Power
+"""Alias for :class:`Power`, named after the SI unit."""
 
 
 class Voltage(BaseUnit):
