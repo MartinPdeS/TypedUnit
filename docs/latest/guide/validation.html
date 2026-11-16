@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Validating function inputs &#8212; TypedUnits 0.5.0 documentation</title>
+    <title>Validating function inputs &#8212; TypedUnit 0.5.1 documentation</title>
   
   
   
@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/default.css?v=265c6c44" />
     <link rel="stylesheet" type="text/css" href="../_static/martinpdes_layout.css?v=a8cc01cd" />
+    <link rel="stylesheet" type="text/css" href="../_static/brand.css?v=ad70f49a" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +45,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -53,7 +54,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.1';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -66,7 +67,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.0" />
+  <meta name="docsearch:version" content="0.5.1" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -136,11 +137,9 @@
     
     
     
-    <img src="../_static/logo.png" class="logo__image only-dark" alt=""/>
-    <img src="../_static/logo.png" class="logo__image only-light pst-js-only" alt=""/>
+    <img src="../_static/logo-dark.svg" class="logo__image only-dark" alt="TypedUnit home"/>
+    <img src="../_static/logo.svg" class="logo__image only-light pst-js-only" alt="TypedUnit home"/>
   
-  
-    <p class="title logo__title">TypedUnits</p>
   
 </a></div>
     
@@ -555,6 +554,21 @@ values are rejected by default. Set <code class="docutils literal notranslate"><
 allows non-finite sentinels and validates them separately. Incompatible units
 raise a named <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. Validation leaves the original quantity unchanged.</p>
 </section>
+<section id="validate-a-typed-annotation-directly">
+<h2>Validate a typed annotation directly<a class="headerlink" href="#validate-a-typed-annotation-directly" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">validate_annotation</span></code> when validation is needed outside a decorated
+function, such as while checking dataclass fields. It accepts the same
+annotations as <code class="docutils literal notranslate"><span class="pre">&#64;unit_validator</span></code> and leaves conversion to the caller:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoUnit</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">,</span> <span class="n">validate_annotation</span>
+
+<span class="n">validate_annotation</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">1.33</span><span class="p">,</span>
+    <span class="n">annotation</span><span class="o">=</span><span class="n">NoUnit</span><span class="p">[</span><span class="n">Scalar</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"background_refractive_index"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 <section id="validate-array-shapes-in-annotations">
 <h2>Validate array shapes in annotations<a class="headerlink" href="#validate-array-shapes-in-annotations" title="Link to this heading">#</a></h2>
 <p>Subscript a unit class with a shape marker to validate the quantity’s
@@ -599,6 +613,29 @@ union; each magnitude must satisfy at least one marker in that union:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative</span></code> accepts positive and negative values, but rejects zero.
 These markers can also be combined with shape markers such as
 <code class="docutils literal notranslate"><span class="pre">Watt[Vector[3],</span> <span class="pre">Float,</span> <span class="pre">Positive]</span></code>.</p>
+</section>
+<section id="bare-values-without-units">
+<h2>Bare values without units<a class="headerlink" href="#bare-values-without-units" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">NoUnit</span></code> when an API requires plain numeric values and must reject Pint
+quantities. It composes with the same shape and value markers:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">NoUnit</span><span class="p">,</span> <span class="n">Positive</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">,</span> <span class="n">unit_validator</span>
+
+<span class="nd">@unit_validator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">refractive_index</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">NoUnit</span><span class="p">[</span><span class="n">Scalar</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Positive</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Accept a bare positive floating-point refractive index."""</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">NoUnit</span></code> rejects quantities, including Pint’s dimensionless quantities.
+Use <code class="docutils literal notranslate"><span class="pre">Dimensionless</span></code> when dimensionless quantities such as percentages are
+valid inputs. Combine them when either bare values or dimensionless quantities
+are accepted:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dimensionless</span><span class="p">,</span> <span class="n">NoUnit</span><span class="p">,</span> <span class="n">unit_validator</span>
+
+<span class="nd">@unit_validator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalized</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Dimensionless</span> <span class="o">|</span> <span class="n">NoUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Accept bare values or quantities with dimensionless units."""</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -652,8 +689,10 @@ These markers can also be combined with shape markers such as
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-and-collection-inputs">Optional and collection inputs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-a-quantity-directly">Validate a quantity directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-a-typed-annotation-directly">Validate a typed annotation directly</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-array-shapes-in-annotations">Validate array shapes in annotations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-constraints">Value constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bare-values-without-units">Bare values without units</a></li>
 </ul>
   </nav></div>
 
@@ -661,7 +700,7 @@ These markers can also be combined with shape markers such as
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.5.0/docs/source/guide/validation.rst">
+    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.5.1/docs/source/guide/validation.rst">
       <i class="fa-solid fa-pencil"></i>
       
       

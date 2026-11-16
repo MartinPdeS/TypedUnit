@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; TypedUnits 0.5.0 documentation</title>
+    <title>API reference &#8212; TypedUnit 0.5.1 documentation</title>
   
   
   
@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/default.css?v=265c6c44" />
     <link rel="stylesheet" type="text/css" href="_static/martinpdes_layout.css?v=a8cc01cd" />
+    <link rel="stylesheet" type="text/css" href="_static/brand.css?v=ad70f49a" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -44,7 +45,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="_static/documentation_options.js?v=70f82a29"></script>
+    <script src="_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/sg-tags.js?v=d80f6fa4"></script>
@@ -53,7 +54,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.1';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -66,7 +67,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.0" />
+  <meta name="docsearch:version" content="0.5.1" />
   
     
     <script src="_static/searchtools.js"></script>
@@ -136,11 +137,9 @@
     
     
     
-    <img src="_static/logo.png" class="logo__image only-dark" alt=""/>
-    <img src="_static/logo.png" class="logo__image only-light pst-js-only" alt=""/>
+    <img src="_static/logo-dark.svg" class="logo__image only-dark" alt="TypedUnit home"/>
+    <img src="_static/logo.svg" class="logo__image only-light pst-js-only" alt="TypedUnit home"/>
   
-  
-    <p class="title logo__title">TypedUnits</p>
   
 </a></div>
     
@@ -502,15 +501,20 @@ for examples and design explanations.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="TypedUnit.helper.unit_validator">
 <span class="sig-name descname"><span class="pre">unit_validator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TypedUnit/helper.html#unit_validator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.helper.unit_validator" title="Link to this definition">#</a></dt>
-<dd><p>Validate parameter quantities against unit and optional shape annotations.</p>
-<p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units.
-Subscript the unit with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>, <code class="docutils literal notranslate"><span class="pre">Finite</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers to validate the magnitude. For example,
+<dd><p>Validate parameter units, bare values, shapes, and value constraints.</p>
+<p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units, or
+with <code class="xref py py-class docutils literal notranslate"><span class="pre">NoUnit</span></code> to require bare numeric values without Pint units.
+Compatible unions such as <code class="docutils literal notranslate"><span class="pre">Dimensionless</span> <span class="pre">|</span> <span class="pre">NoUnit</span></code> accept either form.
+Subscript these markers with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Finite</span></code>, <code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers. For example,
 <code class="docutils literal notranslate"><span class="pre">Watt[Float,</span> <span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative]</span></code> requires a real floating-point value
-that is nonzero.</p>
+that is nonzero; <code class="docutils literal notranslate"><span class="pre">NoUnit[Scalar,</span> <span class="pre">Float]</span></code> accepts a bare floating-point
+scalar and rejects quantities and array magnitudes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.</p>
+<dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.
+If it has a string parameter named <code class="docutils literal notranslate"><span class="pre">name</span></code>, that value is used to
+label validation errors.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Wrapped function that validates bound arguments before calling the
@@ -521,8 +525,8 @@ original function. Return annotations are not validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or violates its shape
-or value constraints.</p></li>
+<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units, is not a bare numeric
+value where required, or violates shape or value constraints.</p></li>
 <li><p><strong>TypeError</strong> – If function arguments are missing or a shape annotation contains
 conflicting shape markers.</p></li>
 </ul>
@@ -531,17 +535,50 @@ conflicting shape markers.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="TypedUnit.helper.validate_units">
-<span class="sig-name descname"><span class="pre">validate_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TypedUnit.helper.validate_units" title="Link to this definition">#</a></dt>
-<dd><p>Validate parameter quantities against unit and optional shape annotations.</p>
-<p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units.
-Subscript the unit with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>, <code class="docutils literal notranslate"><span class="pre">Finite</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers to validate the magnitude. For example,
-<code class="docutils literal notranslate"><span class="pre">Watt[Float,</span> <span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative]</span></code> requires a real floating-point value
-that is nonzero.</p>
+<dt class="sig sig-object py" id="TypedUnit.helper.validate_annotation">
+<span class="sig-name descname"><span class="pre">validate_annotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TypedUnit/helper.html#validate_annotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.helper.validate_annotation" title="Link to this definition">#</a></dt>
+<dd><p>Validate one value directly against a TypedUnit annotation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>Any</em>) – Value to validate.</p></li>
+<li><p><strong>annotation</strong> (<em>Any</em>) – Unit, no-unit, optional, collection, shape, or value-constraint
+annotation supported by <a class="reference internal" href="#TypedUnit.helper.unit_validator" title="TypedUnit.helper.unit_validator"><code class="xref py py-func docutils literal notranslate"><span class="pre">unit_validator()</span></code></a>.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name used in validation errors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value is validated without being modified.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">annotation</span></code> is not supported by TypedUnit.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">value</span></code> does not satisfy the annotation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="TypedUnit.helper.validate_units">
+<span class="sig-name descname"><span class="pre">validate_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TypedUnit.helper.validate_units" title="Link to this definition">#</a></dt>
+<dd><p>Validate parameter units, bare values, shapes, and value constraints.</p>
+<p>Annotate parameters with a <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUnit</span></code> subclass to validate units, or
+with <code class="xref py py-class docutils literal notranslate"><span class="pre">NoUnit</span></code> to require bare numeric values without Pint units.
+Compatible unions such as <code class="docutils literal notranslate"><span class="pre">Dimensionless</span> <span class="pre">|</span> <span class="pre">NoUnit</span></code> accept either form.
+Subscript these markers with shape markers and optional <code class="docutils literal notranslate"><span class="pre">Float</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Finite</span></code>, <code class="docutils literal notranslate"><span class="pre">NonZero</span></code>, <code class="docutils literal notranslate"><span class="pre">Positive</span></code>, or <code class="docutils literal notranslate"><span class="pre">Negative</span></code> markers. For example,
+<code class="docutils literal notranslate"><span class="pre">Watt[Float,</span> <span class="pre">Positive</span> <span class="pre">|</span> <span class="pre">Negative]</span></code> requires a real floating-point value
+that is nonzero; <code class="docutils literal notranslate"><span class="pre">NoUnit[Scalar,</span> <span class="pre">Float]</span></code> accepts a bare floating-point
+scalar and rejects quantities and array magnitudes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – Function whose annotated parameters should be validated.
+If it has a string parameter named <code class="docutils literal notranslate"><span class="pre">name</span></code>, that value is used to
+label validation errors.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Wrapped function that validates bound arguments before calling the
@@ -552,8 +589,8 @@ original function. Return annotations are not validated.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units or violates its shape
-or value constraints.</p></li>
+<li><p><strong>ValueError</strong> – If an annotated argument has incompatible units, is not a bare numeric
+value where required, or violates shape or value constraints.</p></li>
 <li><p><strong>TypeError</strong> – If function arguments are missing or a shape annotation contains
 conflicting shape markers.</p></li>
 </ul>
@@ -672,6 +709,14 @@ conflicting shape markers.</p></li>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Negative</span></span><a class="reference internal" href="_modules/TypedUnit/constraints.html#Negative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.Negative" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Marker requiring every magnitude to be strictly negative.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="TypedUnit.units.NoUnit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NoUnit</span></span><a class="reference internal" href="_modules/TypedUnit/units.html#NoUnit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TypedUnit.units.NoUnit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Marker requiring bare numeric values without Pint units.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">NoUnit[Scalar,</span> <span class="pre">Float]</span></code> to require a bare floating-point scalar.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -850,6 +895,7 @@ conflicting shape markers.</p></li>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.helper.unit_validator"><code class="docutils literal notranslate"><span class="pre">unit_validator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.helper.validate_annotation"><code class="docutils literal notranslate"><span class="pre">validate_annotation()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.helper.validate_units"><code class="docutils literal notranslate"><span class="pre">validate_units()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Angle"><code class="docutils literal notranslate"><span class="pre">Angle</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.AnyUnit"><code class="docutils literal notranslate"><span class="pre">AnyUnit</span></code></a></li>
@@ -867,6 +913,7 @@ conflicting shape markers.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Mass"><code class="docutils literal notranslate"><span class="pre">Mass</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Matrix"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Negative"><code class="docutils literal notranslate"><span class="pre">Negative</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.NoUnit"><code class="docutils literal notranslate"><span class="pre">NoUnit</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.NonZero"><code class="docutils literal notranslate"><span class="pre">NonZero</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Ohm"><code class="docutils literal notranslate"><span class="pre">Ohm</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#TypedUnit.units.Particle"><code class="docutils literal notranslate"><span class="pre">Particle</span></code></a></li>
@@ -892,7 +939,7 @@ conflicting shape markers.</p></li>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.5.0/docs/source/code.rst">
+    <a href="https://github.com/MartinPdeS/TypedUnit/edit/v0.5.1/docs/source/code.rst">
       <i class="fa-solid fa-pencil"></i>
       
       

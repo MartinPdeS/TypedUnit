@@ -1,0 +1,8 @@
+/* Preserve the brand palette instead of the shared theme's white silhouette. */
+.bd-header .navbar-brand img.logo__image {
+    width: 14rem;
+    max-width: min(14rem, 55vw);
+    height: auto;
+    filter: none;
+    object-fit: contain;
+}

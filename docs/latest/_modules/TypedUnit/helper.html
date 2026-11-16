@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TypedUnit.helper &#8212; TypedUnits 0.5.0 documentation</title>
+    <title>TypedUnit.helper &#8212; TypedUnit 0.5.1 documentation</title>
   
   
   
@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../../_static/default.css?v=265c6c44" />
     <link rel="stylesheet" type="text/css" href="../../_static/martinpdes_layout.css?v=a8cc01cd" />
+    <link rel="stylesheet" type="text/css" href="../../_static/brand.css?v=ad70f49a" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
@@ -43,7 +44,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
-    <script src="../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../_static/documentation_options.js?v=d9b85e4f"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -52,7 +53,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/MartinPdeS/TypedUnit/documentation_page/version_switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5.1';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -63,7 +64,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.0" />
+  <meta name="docsearch:version" content="0.5.1" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -133,11 +134,9 @@
     
     
     
-    <img src="../../_static/logo.png" class="logo__image only-dark" alt=""/>
-    <img src="../../_static/logo.png" class="logo__image only-light pst-js-only" alt=""/>
+    <img src="../../_static/logo-dark.svg" class="logo__image only-dark" alt="TypedUnit home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-light pst-js-only" alt="TypedUnit home"/>
   
-  
-    <p class="title logo__title">TypedUnits</p>
   
 </a></div>
     
@@ -480,7 +479,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit.constraints</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finite</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Negative</span><span class="p">,</span> <span class="n">NonZero</span><span class="p">,</span> <span class="n">Positive</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit.shapes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">,</span> <span class="n">ShapeSpec</span><span class="p">,</span> <span class="n">Vector</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUnit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">TypedUnit.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUnit</span><span class="p">,</span> <span class="n">NoUnit</span><span class="p">,</span> <span class="n">Quantity</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_shape_spec</span><span class="p">(</span><span class="n">marker</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShapeSpec</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -503,7 +502,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_unit_type</span><span class="p">(</span>
     <span class="n">hint</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
-    <span class="nb">type</span><span class="p">[</span><span class="n">BaseUnit</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">BaseUnit</span><span class="p">]</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">NoUnit</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="nb">bool</span><span class="p">,</span>
     <span class="nb">bool</span><span class="p">,</span>
     <span class="n">ShapeSpec</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -512,7 +511,7 @@
     <span class="nb">bool</span><span class="p">,</span>
     <span class="nb">tuple</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span>
 <span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Extract unit type, optionality, collection, shape, and value constraints."""</span>
+<span class="w">    </span><span class="sd">"""Extract accepted types, optionality, shape, and value constraints."""</span>
     <span class="n">origin</span> <span class="o">=</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">get_args</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span>
 
@@ -571,32 +570,60 @@
 
     <span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Union</span><span class="p">,</span> <span class="n">UnionType</span><span class="p">):</span>
         <span class="n">non_none</span> <span class="o">=</span> <span class="p">[</span><span class="n">argument</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="n">argument</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+        <span class="n">optional</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_none</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">contracts</span> <span class="o">=</span> <span class="p">[</span><span class="n">_get_unit_type</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">non_none</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_none</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="p">(</span>
-                <span class="n">unit_type</span><span class="p">,</span>
-                <span class="n">_</span><span class="p">,</span>
-                <span class="n">is_list</span><span class="p">,</span>
-                <span class="n">shape</span><span class="p">,</span>
-                <span class="n">requires_float</span><span class="p">,</span>
-                <span class="n">requires_finite</span><span class="p">,</span>
-                <span class="n">requires_nonzero</span><span class="p">,</span>
-                <span class="n">sign_groups</span><span class="p">,</span>
-            <span class="p">)</span> <span class="o">=</span> <span class="n">_get_unit_type</span><span class="p">(</span><span class="n">non_none</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">contracts</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
 
-            <span class="k">if</span> <span class="n">unit_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">(</span>
-                    <span class="n">unit_type</span><span class="p">,</span>
-                    <span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_list</span><span class="p">,</span>
-                    <span class="n">shape</span><span class="p">,</span>
-                    <span class="n">requires_float</span><span class="p">,</span>
-                    <span class="n">requires_finite</span><span class="p">,</span>
-                    <span class="n">requires_nonzero</span><span class="p">,</span>
-                    <span class="n">sign_groups</span><span class="p">,</span>
-                <span class="p">)</span>
+        <span class="n">contract_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">BaseUnit</span><span class="p">]</span> <span class="o">|</span> <span class="nb">type</span><span class="p">[</span><span class="n">NoUnit</span><span class="p">],</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+        <span class="k">for</span> <span class="n">contract</span> <span class="ow">in</span> <span class="n">contracts</span><span class="p">:</span>
+            <span class="n">candidate_types</span> <span class="o">=</span> <span class="n">contract</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">candidate_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+
+            <span class="n">contract_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate_types</span><span class="p">)</span>
+
+        <span class="n">first</span> <span class="o">=</span> <span class="n">contracts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">contracts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="kc">True</span><span class="p">,</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+                <span class="n">first</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+            <span class="p">)</span>
+
+        <span class="n">compatible</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="ow">not</span> <span class="n">contract</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">contract</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="n">contract</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="n">first</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+            <span class="k">for</span> <span class="n">contract</span> <span class="ow">in</span> <span class="n">contracts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="ow">or</span> <span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">first</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+
+        <span class="n">unit_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span>
+                <span class="n">unit_type</span> <span class="k">for</span> <span class="n">candidates</span> <span class="ow">in</span> <span class="n">contract_types</span> <span class="k">for</span> <span class="n">unit_type</span> <span class="ow">in</span> <span class="n">candidates</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">unit_types</span><span class="p">,</span>
+            <span class="n">optional</span><span class="p">,</span>
+            <span class="kc">False</span><span class="p">,</span>
+            <span class="n">first</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="n">first</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="n">first</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+            <span class="n">first</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+            <span class="n">first</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -625,27 +652,196 @@
 
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
 
+    <span class="k">if</span> <span class="n">hint</span> <span class="ow">is</span> <span class="n">NoUnit</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">NoUnit</span><span class="p">,),</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+
     <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">BaseUnit</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">hint</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">hint</span><span class="p">,),</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
 
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">()</span>
+
+
+<div class="viewcode-block" id="validate_annotation">
+<a class="viewcode-back" href="../../code.html#TypedUnit.helper.validate_annotation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_annotation</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Validate one value directly against a TypedUnit annotation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    value : Any</span>
+<span class="sd">        Value to validate.</span>
+<span class="sd">    annotation : Any</span>
+<span class="sd">        Unit, no-unit, optional, collection, shape, or value-constraint</span>
+<span class="sd">        annotation supported by :func:`unit_validator`.</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name used in validation errors.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        The value is validated without being modified.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``annotation`` is not supported by TypedUnit.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``value`` does not satisfy the annotation.</span>
+<span class="sd">    """</span>
+    <span class="p">(</span>
+        <span class="n">unit_types</span><span class="p">,</span>
+        <span class="n">is_optional</span><span class="p">,</span>
+        <span class="n">is_list</span><span class="p">,</span>
+        <span class="n">shape</span><span class="p">,</span>
+        <span class="n">requires_float</span><span class="p">,</span>
+        <span class="n">requires_finite</span><span class="p">,</span>
+        <span class="n">requires_nonzero</span><span class="p">,</span>
+        <span class="n">sign_groups</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_get_unit_type</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">unit_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unsupported TypedUnit annotation: </span><span class="si">{</span><span class="n">annotation</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_optional</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' cannot be None"</span><span class="p">)</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="n">value</span> <span class="k">if</span> <span class="n">is_list</span> <span class="k">else</span> <span class="p">(</span><span class="n">value</span><span class="p">,)</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+        <span class="n">item_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">]"</span> <span class="k">if</span> <span class="n">is_list</span> <span class="k">else</span> <span class="n">name</span>
+
+        <span class="n">unitless_allowed</span> <span class="o">=</span> <span class="n">NoUnit</span> <span class="ow">in</span> <span class="n">unit_types</span>
+        <span class="n">quantity_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">BaseUnit</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">unit_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">candidate</span> <span class="ow">is</span> <span class="n">NoUnit</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">candidate</span><span class="p">,</span> <span class="n">BaseUnit</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="n">quantity_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">unitless_allowed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">quantity_types</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must not have units."</span><span class="p">)</span>
+
+            <span class="n">compatible_unit</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">quantity_types</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">candidate</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="n">compatible_unit</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">compatible_unit</span><span class="p">:</span>
+                <span class="n">expected</span> <span class="o">=</span> <span class="s2">" or "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">candidate</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">quantity_types</span>
+                <span class="p">)</span>
+
+                <span class="n">cause</span> <span class="o">=</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">units</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">unitless_allowed</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have units compatible with </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, or no units."</span>
+                    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">cause</span>
+
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have units compatible with </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">cause</span>
+
+            <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">unitless_allowed</span><span class="p">:</span>
+            <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be a bare numeric value."</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">expected</span> <span class="o">=</span> <span class="s2">" or "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">quantity_types</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have units compatible with </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">actual_shape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">shape</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">actual_shape</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">; got shape </span><span class="si">{</span><span class="n">actual_shape</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">requires_finite</span> <span class="ow">or</span> <span class="n">requires_nonzero</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have numeric magnitudes for finite and nonzero checks."</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">requires_finite</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be finite."</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">requires_nonzero</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">magnitude</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be nonzero."</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sign_groups</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have real numeric magnitudes for sign checks."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">requires_float</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have a real floating-point magnitude."</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">sign_group</span> <span class="ow">in</span> <span class="n">sign_groups</span><span class="p">:</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">Positive</span> <span class="ow">in</span> <span class="n">sign_group</span><span class="p">:</span>
+                <span class="n">valid</span> <span class="o">|=</span> <span class="n">magnitude</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">Negative</span> <span class="ow">in</span> <span class="n">sign_group</span><span class="p">:</span>
+                <span class="n">valid</span> <span class="o">|=</span> <span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">valid</span><span class="p">):</span>
+                <span class="n">expected</span> <span class="o">=</span> <span class="s2">" or "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">sign</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">sign</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Positive</span><span class="p">,</span> <span class="n">Negative</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">sign</span> <span class="ow">in</span> <span class="n">sign_group</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="unit_validator">
 <a class="viewcode-back" href="../../code.html#TypedUnit.helper.unit_validator">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unit_validator</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Validate parameter quantities against unit and optional shape annotations.</span>
+<span class="w">    </span><span class="sd">"""Validate parameter units, bare values, shapes, and value constraints.</span>
 
-<span class="sd">    Annotate parameters with a :class:`BaseUnit` subclass to validate units.</span>
-<span class="sd">    Subscript the unit with shape markers and optional ``Float``, ``Finite``,</span>
-<span class="sd">    ``NonZero``, ``Positive``, or ``Negative`` markers to validate the magnitude. For example,</span>
+<span class="sd">    Annotate parameters with a :class:`BaseUnit` subclass to validate units, or</span>
+<span class="sd">    with :class:`NoUnit` to require bare numeric values without Pint units.</span>
+<span class="sd">    Compatible unions such as ``Dimensionless | NoUnit`` accept either form.</span>
+<span class="sd">    Subscript these markers with shape markers and optional ``Float``,</span>
+<span class="sd">    ``Finite``, ``NonZero``, ``Positive``, or ``Negative`` markers. For example,</span>
 <span class="sd">    ``Watt[Float, Positive | Negative]`` requires a real floating-point value</span>
-<span class="sd">    that is nonzero.</span>
+<span class="sd">    that is nonzero; ``NoUnit[Scalar, Float]`` accepts a bare floating-point</span>
+<span class="sd">    scalar and rejects quantities and array magnitudes.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    function : callable</span>
 <span class="sd">        Function whose annotated parameters should be validated.</span>
+<span class="sd">        If it has a string parameter named ``name``, that value is used to</span>
+<span class="sd">        label validation errors.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -656,8 +852,8 @@
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
-<span class="sd">        If an annotated argument has incompatible units or violates its shape</span>
-<span class="sd">        or value constraints.</span>
+<span class="sd">        If an annotated argument has incompatible units, is not a bare numeric</span>
+<span class="sd">        value where required, or violates shape or value constraints.</span>
 <span class="sd">    TypeError</span>
 <span class="sd">        If function arguments are missing or a shape annotation contains</span>
 <span class="sd">        conflicting shape markers.</span>
@@ -675,92 +871,19 @@
             <span class="k">if</span> <span class="n">parameter_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hints</span><span class="p">:</span>
                 <span class="k">continue</span>
 
-            <span class="p">(</span>
-                <span class="n">unit_type</span><span class="p">,</span>
-                <span class="n">is_optional</span><span class="p">,</span>
-                <span class="n">is_list</span><span class="p">,</span>
-                <span class="n">shape</span><span class="p">,</span>
-                <span class="n">requires_float</span><span class="p">,</span>
-                <span class="n">requires_finite</span><span class="p">,</span>
-                <span class="n">requires_nonzero</span><span class="p">,</span>
-                <span class="n">sign_groups</span><span class="p">,</span>
-            <span class="p">)</span> <span class="o">=</span> <span class="n">_get_unit_type</span><span class="p">(</span><span class="n">hints</span><span class="p">[</span><span class="n">parameter_name</span><span class="p">])</span>
+            <span class="n">error_name</span> <span class="o">=</span> <span class="n">bound_arguments</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">parameter_name</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">unit_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">error_name</span> <span class="o">=</span> <span class="n">parameter_name</span>
+
+            <span class="k">if</span> <span class="n">_get_unit_type</span><span class="p">(</span><span class="n">hints</span><span class="p">[</span><span class="n">parameter_name</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">continue</span>
 
-            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">is_optional</span><span class="p">:</span>
-                    <span class="k">continue</span>
-
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">parameter_name</span><span class="si">}</span><span class="s2">' cannot be None"</span><span class="p">)</span>
-
-            <span class="n">values</span> <span class="o">=</span> <span class="n">value</span> <span class="k">if</span> <span class="n">is_list</span> <span class="k">else</span> <span class="p">(</span><span class="n">value</span><span class="p">,)</span>
-
-            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
-                <span class="n">item_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">parameter_name</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">]"</span> <span class="k">if</span> <span class="n">is_list</span> <span class="k">else</span> <span class="n">parameter_name</span>
-
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">unit_type</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-                <span class="k">except</span> <span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have units compatible with </span><span class="si">{</span><span class="n">unit_type</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span>
-                    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
-
-                <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">actual_shape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">magnitude</span><span class="p">))</span>
-
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">shape</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">actual_shape</span><span class="p">):</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                            <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">; got shape </span><span class="si">{</span><span class="n">actual_shape</span><span class="si">}</span><span class="s2">."</span>
-                        <span class="p">)</span>
-
-                <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">requires_finite</span> <span class="ow">or</span> <span class="n">requires_nonzero</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                            <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have numeric magnitudes for finite and nonzero checks."</span>
-                        <span class="p">)</span>
-
-                    <span class="k">if</span> <span class="n">requires_finite</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)):</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be finite."</span><span class="p">)</span>
-
-                    <span class="k">if</span> <span class="n">requires_nonzero</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">magnitude</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be nonzero."</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">sign_groups</span> <span class="ow">and</span> <span class="p">(</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span>
-                    <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
-                <span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have real numeric magnitudes for sign checks."</span>
-                    <span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">requires_float</span> <span class="ow">and</span> <span class="p">(</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span>
-                    <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span>
-                <span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must have a real floating-point magnitude."</span>
-                    <span class="p">)</span>
-
-                <span class="k">for</span> <span class="n">sign_group</span> <span class="ow">in</span> <span class="n">sign_groups</span><span class="p">:</span>
-                    <span class="n">valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-
-                    <span class="k">if</span> <span class="n">Positive</span> <span class="ow">in</span> <span class="n">sign_group</span><span class="p">:</span>
-                        <span class="n">valid</span> <span class="o">|=</span> <span class="n">magnitude</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-                    <span class="k">if</span> <span class="n">Negative</span> <span class="ow">in</span> <span class="n">sign_group</span><span class="p">:</span>
-                        <span class="n">valid</span> <span class="o">|=</span> <span class="n">magnitude</span> <span class="o">&lt;</span> <span class="mi">0</span>
-
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">valid</span><span class="p">):</span>
-                        <span class="n">expected</span> <span class="o">=</span> <span class="s2">" or "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                            <span class="n">sign</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                            <span class="k">for</span> <span class="n">sign</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Positive</span><span class="p">,</span> <span class="n">Negative</span><span class="p">)</span>
-                            <span class="k">if</span> <span class="n">sign</span> <span class="ow">in</span> <span class="n">sign_group</span>
-                        <span class="p">)</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter '</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">' must be </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+            <span class="n">validate_annotation</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span>
+                <span class="n">annotation</span><span class="o">=</span><span class="n">hints</span><span class="p">[</span><span class="n">parameter_name</span><span class="p">],</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">error_name</span><span class="p">,</span>
+            <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -771,7 +894,7 @@
 <span class="n">validate_units</span> <span class="o">=</span> <span class="n">unit_validator</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"unit_validator"</span><span class="p">,</span> <span class="s2">"validate_units"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"unit_validator"</span><span class="p">,</span> <span class="s2">"validate_annotation"</span><span class="p">,</span> <span class="s2">"validate_units"</span><span class="p">]</span>
 </pre></div>
 
                 </article>
